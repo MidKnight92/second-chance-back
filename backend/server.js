@@ -29,6 +29,17 @@ app.use(bodyParser.urlencoded({
 // app.use('/', (req, res) => {
 // 	res.send('Hello World')
 // })
+
+// Enable Cors
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 app.use('/users', userController)
 app.use('/dogs', dogController)
 

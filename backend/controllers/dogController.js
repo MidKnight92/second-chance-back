@@ -23,12 +23,15 @@ router.get('/', (req, res) => {
 
 // Shelter Dogs Index
 // GET /dogs/shelter
+// GET https://api.petfinder.com/v2/{CATEGORY}/{ACTION}?{parameter_1}={value_1}&{parameter_2}={value_2}
 router.get('/shelter', async (req, res, next) => {
-	const url  = 'https://api.petfinder.com/v2/animals'
+	const url  = 'https://api.petfinder.com/v2/animals?type=dog&color=black'; 
 })
 
 // Shelter Dog Show Page
 // GET /dogs/shelter/:id
+// GET https://api.petfinder.com/v2/animals/{id}
+
 
 // Home to Rehome Dogs Index
 // GET /dogs/rehome
