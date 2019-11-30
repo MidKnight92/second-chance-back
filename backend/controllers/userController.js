@@ -4,6 +4,9 @@ const User = require('../models/user.js')
 const Dog = require('../models/dog.js')
 const bcrypt = require('bcryptjs')
 
+router.get('/', (req, res) => {
+	res.send('Hitting user Controller')
+})
 // User Registration -
 // GET /users/register
 // POST /users/register

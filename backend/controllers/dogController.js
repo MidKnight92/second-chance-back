@@ -4,6 +4,10 @@ const superagent = require('superagent')
 const Buffer = require('buffer/').Buffer
 const Dog = require('../models/dog.js')
 const User = require('../models/user.js')
+
+router.get('/', (req, res) => {
+	res.send('Hitting dog Controller')
+})
 // User Looking to Rehome their dog Routes - This route will show a form of dog criteria for the user to fill out in order to create a profile for their dog to be inserted into the rehoming section
 // GET /dogs/new
 // POST /dogs
@@ -15,8 +19,13 @@ const User = require('../models/user.js')
 // GET /dogs/:id/edit
 // PUT /dogs/:id
 
+// Routes using PetFinder API below
+
 // Shelter Dogs Index
 // GET /dogs/shelter
+router.get('/shelter', async (req, res, next) => {
+	const url  = 'https://api.petfinder.com/v2/animals'
+})
 
 // Shelter Dog Show Page
 // GET /dogs/shelter/:id
