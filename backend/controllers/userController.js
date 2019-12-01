@@ -1,15 +1,18 @@
-// NEED TO REQUIRE AUTH AFTER TESTING ROUTES
 const express = require('express');
 const router = express.Router()
 const User = require('../models/user.js')
 const Dog = require('../models/dog.js')
 const bcrypt = require('bcryptjs')
 
+//@route GET /users/
+//@description test route
 router.get('/', (req, res) => {
-    res.send('Hitting user Controller')
+    res.json('Hitting User Controller')
 })
+
 //@route GET /users/register
-//@description User Registration -
+//@description User Registration 
+//@access public
 router.get('/register', (req, res) => {
 	let messageToShow = ''
 	if (req.session.message) {
@@ -20,6 +23,7 @@ router.get('/register', (req, res) => {
 })
 
 //@route POST /users/register
+//@access public
 router.post('/register', async (req, res, next) => {
 	const username = req.body.username
 	try {
@@ -56,6 +60,7 @@ router.post('/register', async (req, res, next) => {
 
 //@route GET /users/login
 //@description User Login
+//@access public
 router.get('/login', (req, res) => {
 	let messageToShow = ''
 	if (req.session.message){
@@ -66,25 +71,31 @@ router.get('/login', (req, res) => {
 })
 
 //@route POST /users/login
+//@access public
 router.post('/login', async (req, res, next) => {
     try {
+    	console.log(req.body);
         const foundUsers = await User.find({
             username: req.body.username
         })
         if (foundUsers.length === 0) {
             req.session.message = 'invalid username or password'
-            res.redirect('/users/login')
+            res.json('Invalid username or password')
+            // res.redirect('/users/login')
         } else {
             const password = req.body.password
+            console.log('This is the password', password);
             if (bcrypt.compareSync(password, foundUsers[0].password)) {
                 req.session.loggedIn = true
                 req.session.userId = foundUsers[0]._id
                 req.session.username = foundUsers[0].username
-                res.redirect('/register')
+            	console.log('This is req.session:', req.session, '\nThis is req.body:', req.body);
+                // res.redirect('/register')
+                res.json(foundUsers[0])
             } else {
                 req.session.message = 'Invalid username or password'
                 // res.redirect('/users/login')
-                res.json('User is logging in')
+                res.json('Invalid username or password')
             }
         }
     } catch (err) {
@@ -93,32 +104,6 @@ router.post('/login', async (req, res, next) => {
     }
 })
 
-//@route GET /users/:id/edit
-//@description User Edit - require Auth This route will allow them to edit their personal information
-router.get('/:id/edit', async (req, res, next) => {
-	try {
-		const user = await User.findById(req.params.id);
-			res.json({user: user})
-	}
-	catch (err) {
-		res.status(400).json('Error' + err)		
-		next(err)
-	}
-})
-
-//@route PUT /users/:id/
-router.put('/:id', async (req, res, next) => {
-	try {
-		const user = await User.findOneAndUpdate(req.params.id, req.body, (err, updatedMoedl) => {
-			res.json('User has been updated:', )
-			// res.redirect('/:id')
-		})
-	}
-	catch (err) {
-		res.status(400).json('Error' + err)		
-		next(err)
-	}
-})
 
 //@route GET /users/logout
 //@description User Logout
@@ -134,8 +119,37 @@ router.get('/logout', async (req, res, next) => {
 	}
 })
 
+// Middleware
+const requireAuth = (req, res, next) => {
+	if (!req.session.loggedIn) {
+		req.session.message = 'You must be logged in to do that'
+		res.json(req.session)
+	} else {
+		next()
+	}
+}
+
+// All routes below will now requireAuth
+router.use(requireAuth)
+
+//@route PUT /users/:id/
+//@access restricted
+router.put('/:id', async (req, res, next) => {
+	try {
+		const user = await User.findOneAndUpdate(req.params.id, req.body, (err, updatedMoedl) => {
+			res.json('User has been updated:', user)
+			// res.redirect('/:id')
+		})
+	}
+	catch (err) {
+		res.status(400).json('Error' + err)		
+		next(err)
+	}
+})
+
 //@route DELETE /users/:id
 //@description User Delete - require Auth
+//@access restricted
 router.delete('/:id', async (req, res, next) => {
 	try {
 		const findUser = await User.deleteOne({_id: req.params.id})
@@ -149,8 +163,23 @@ router.delete('/:id', async (req, res, next) => {
 	}
 })
 
+//@route GET /users/:id/edit
+//@description User Edit - require Auth This route will allow them to edit their personal information
+//@access restricted
+router.get('/:id/edit', async (req, res, next) => {
+	try {
+		const user = await User.findById(req.params.id);
+			res.json({user: user})
+	}
+	catch (err) {
+		res.status(400).json('Error' + err)		
+		next(err)
+	}
+})	
+
 //@route GET /users/:id
 //@description Users Show Page: This route shows users dog matches require Auth
+//@access restricted
 router.get('/:id', async (req, res, next) => {
 	try {
 		const dogs = await Dog.find({user: req.session.userId});

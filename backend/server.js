@@ -20,6 +20,7 @@ app.use(methodOverride('_method'))
 app.use(bodyParser.urlencoded({
 	extended: false
 }))
+
 app.use(session({
 	secret: process.env.SESSION_SECRET,
 	saveUninitialized: false,
@@ -40,9 +41,10 @@ app.use((req, res, next) => {
   	)
   next();
 });
+
 // Controllers
-app.use('/users', userController)
-app.use('/dogs', dogController)
+app.use('/api/v1/users', userController)
+app.use('/api/v1/dogs', dogController)
 
 //Port Connection  
 app.listen(PORT, () => {

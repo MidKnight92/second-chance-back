@@ -1,23 +1,77 @@
 const express = require('express')
 const router = express.Router()
 const superagent = require('superagent')
+const axios = require('axios')
 const Buffer = require('buffer/').Buffer
 const Dog = require('../models/dog.js')
 const User = require('../models/user.js')
 
-
+//@route GET /dogs/
+//@description test route
+//@access public 
 router.get('/', (req, res) => {
 	res.json('Hitting dog Controller')
 })
 
+// Routes using PetFinder API below
+	// Example: 
+	// GET https://api.petfinder.com/v2/{CATEGORY}/{ACTION}?{parameter_1}={value_1}&{parameter_2}={value_2}
+
+//@route GET /dogs/shelter
+//@description Shelter Dogs Index
+//@access public
+router.get('/shelter', async (req, res, next) => {
+	const token = process.env.TOKEN_TYPE
+	const apiKey = process.env.API_KEY;
+	const url  = 'https://api.petfinder.com/v2/animals?type=dog&color=black'; 
+	const headers = {
+		host: url,
+		method: 'GET',
+
+		headers: {
+			'X-AUTH-Token': apiKey
+		}
+	};
+	let data = '';
+
+})
+
+//@route GET /dogs/shelter/:id
+//@description Shelter Dog Show Page
+//@access public
+// GET https://api.petfinder.com/v2/animals/{id}
+
+
+//@route GET /dogs/rehome
+//@description Home to Rehome Dogs Index
+//@access public
+
+//@route GET /dogs/rehome/:id
+//@description Home to Rehome Dog Show Page
+//@access public
+
+// Middleware - All routes below will now require Auth
+const requireAuth = (req, res, next) => {
+	if (!req.session.loggedIn) {
+		req.session.message = 'You must be logged in to do that'
+		res.json('User must log in - Auth is required')
+	} else {
+		next()
+	}
+}
+
+
 //@route GET /dogs/new
 //@description User Looking to Rehome their dog Routes - This route will show a form of dog criteria for the user to fill out in order to create a profile for their dog to be inserted into the rehoming section
 router.get('/new', (req, res) => {
-	adopted
+	res.json('new')
 })
 
 //@route POST /dogs
+//@description User Looking to Rehome their dog Routes - This route will show a form of dog criteria for the user to fill out in order to create a profile for their dog to be inserted into the rehoming section
+//@access restricted
 router.post('/new', async (req, res, next) => {
+	console.log(req.session);
 	try {
 		if (req.body.good_with_children === 'on') {
 			req.body.good_with_children = true;
@@ -54,7 +108,7 @@ router.post('/new', async (req, res, next) => {
 				image: req.body.image
 			}
 			const savedDog = await Dog.create(dog)
-			res.json('Dog Info added:', savedDog )
+			res.json(savedDog)
 			// res.redirect('/dogs/:id')
 		} else {
 			req.session.logOutMsg = 'You need to create an account';
@@ -68,6 +122,7 @@ router.post('/new', async (req, res, next) => {
 		next(err)
 	}
 })
+
 //@route GET /dogs/:id
 //@description This route will allow Users to see their dogs’ profile page
 router.get('/:id', async (req, res, next) => {
@@ -100,6 +155,8 @@ router.get('/:id/edit', async (req, res, next) => {
 })
 
 //@route PUT /dogs/:id
+//@description This route will allow Users to edit their dogs’ profile page -- require auth’d user to be that dogs owner
+//@access restricted
 router.put('/:id', async (req, res, next) => {
 	try {
 		const updatedDogInfo = {
@@ -125,36 +182,5 @@ router.put('/:id', async (req, res, next) => {
 	}
 })
 
-// Routes using PetFinder API below
-	// GET https://api.petfinder.com/v2/{CATEGORY}/{ACTION}?{parameter_1}={value_1}&{parameter_2}={value_2}
-
-//@route GET /dogs/shelter
-//@description Shelter Dogs Index
-router.get('/shelter', async (req, res, next) => {
-	const token = process.env.TOKEN_TYPE
-	const apiKey = process.env.API_KEY;
-	const url  = 'https://api.petfinder.com/v2/animals?type=dog&color=black'; 
-	const headers = {
-		host: url,
-		method: 'GET',
-
-		headers: {
-			'X-AUTH-Token': apiKey
-		}
-	};
-	let data = '';
-
-})
-
-//@route GET /dogs/shelter/:id
-//@description Shelter Dog Show Page
-// GET https://api.petfinder.com/v2/animals/{id}
-
-
-//@route GET /dogs/rehome
-//@description Home to Rehome Dogs Index
-
-//@route GET /dogs/rehome/:id
-//@description Home to Rehome Dog Show Page
 
 module.exports = router
