@@ -1,3 +1,4 @@
+// NEED TO REQUIRE AUTH AFTER TESTING ROUTES
 const express = require('express');
 const router = express.Router()
 const User = require('../models/user.js')
@@ -7,8 +8,8 @@ const bcrypt = require('bcryptjs')
 router.get('/', (req, res) => {
     res.send('Hitting user Controller')
 })
-// User Registration -
-// GET /users/register
+//@route GET /users/register
+//@description User Registration -
 router.get('/register', (req, res) => {
 	let messageToShow = ''
 	if (req.session.message) {
@@ -17,7 +18,8 @@ router.get('/register', (req, res) => {
 	} 
 	res.json({message: messageToShow})
 })
-// POST /users/register
+
+//@route POST /users/register
 router.post('/register', async (req, res, next) => {
 	const username = req.body.username
 	try {
@@ -42,15 +44,18 @@ router.post('/register', async (req, res, next) => {
 			req.session.loggedIn = true
 			req.session.userId = createdUser._id
 			req.session.username = createdUser.username
-			res.redirect('/')
+			// res.redirect('/')
+			res.json(createdUser)
 		}
 	}
 	catch (err) {
+		res.status(400).json('Error' + err)
 		next(err)
 	}
 })
-// User Login
-// GET /users/login
+
+//@route GET /users/login
+//@description User Login
 router.get('/login', (req, res) => {
 	let messageToShow = ''
 	if (req.session.message){
@@ -59,7 +64,8 @@ router.get('/login', (req, res) => {
 	}
 	res.json({message: messageToShow})
 })
-// POST /users/login
+
+//@route POST /users/login
 router.post('/login', async (req, res, next) => {
     try {
         const foundUsers = await User.find({
@@ -77,52 +83,74 @@ router.post('/login', async (req, res, next) => {
                 res.redirect('/register')
             } else {
                 req.session.message = 'Invalid username or password'
-                res.redirect('/users/login')
+                // res.redirect('/users/login')
+                res.json('User is logging in')
             }
         }
     } catch (err) {
+    	res.status(400).json('Error' + err)
         next(err)
     }
 })
 
-// User Edit - require Auth This route will allow them to edit their personal information
-// GET /users/:id/edit
+//@route GET /users/:id/edit
+//@description User Edit - require Auth This route will allow them to edit their personal information
 router.get('/:id/edit', async (req, res, next) => {
 	try {
-		const user = await User
+		const user = await User.findById(req.params.id);
+			res.json({user: user})
 	}
 	catch (err) {
+		res.status(400).json('Error' + err)		
 		next(err)
 	}
 })
-// PUT /users/:id/
 
-// User Logout
-// GET /users/logout
+//@route PUT /users/:id/
+router.put('/:id', async (req, res, next) => {
+	try {
+		const user = await User.findOneAndUpdate(req.params.id, req.body, (err, updatedMoedl) => {
+			res.json('User has been updated:', )
+			// res.redirect('/:id')
+		})
+	}
+	catch (err) {
+		res.status(400).json('Error' + err)		
+		next(err)
+	}
+})
+
+//@route GET /users/logout
+//@description User Logout
 router.get('/logout', async (req, res, next) => {
 	try {
 		await req.session.destroy()
-		res.redirect('/')
+		res.json('Session over')
+		// res.redirect('/')
 	}
 	catch (err) {
+		res.status(400).json('Error' + err)
 		next(err)
 	}
 })
-// User Delete - require Auth
-// DELETE /users/:id
+
+//@route DELETE /users/:id
+//@description User Delete - require Auth
 router.delete('/:id', async (req, res, next) => {
 	try {
 		const findUser = await User.deleteOne({_id: req.params.id})
 		await Dog.deleteMany({user: req.params.id})
-		res.redirect('/')
+		res.json('User Deleted')
+		// res.redirect('/')
 	}
 	catch (err) {
+		res.status(400).json('Error' + err)		
 		next(err)
 	}
 })
 
-// Users Show Page: This route shows users dog matches require Auth
-//GET /users/:id
+//@route GET /users/:id
+//@description Users Show Page: This route shows users dog matches require Auth
 router.get('/:id', async (req, res, next) => {
 	try {
 		const dogs = await Dog.find({user: req.session.userId});
@@ -132,6 +160,7 @@ router.get('/:id', async (req, res, next) => {
 		});
 	}
 	catch (err) {
+		res.status(400).json('Error' + err)
 		next(err)
 	}
 })
