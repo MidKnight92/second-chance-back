@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const NF404 = () => {
   return (
@@ -11,8 +12,9 @@ const NF404 = () => {
 const App = () => {
   return(
     <main>
+    <Navbar />
       <Switch>
-      <Route component={NF404} />
+      <Route path='' component={NF404} />
       </Switch>
     </main>
     )
