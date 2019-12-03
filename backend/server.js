@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const session = require('express-session')
 const methodOverride = require('method-override')
+const cloudinary = require('cloudinary')
 const PORT = process.env.PORT;
 const app = express();
 const userController = require('./controllers/userController.js')
@@ -27,6 +28,12 @@ app.use(session({
 	resave: false
 }))
 
+
+cloudinary.config({ 
+  cloud_name: process.env.CLOUD_NAME, 
+  api_key: process.env.ClOUDINARY_API_KEY, 
+  api_secret: process.env.ClOUDINARY_SECRET
+})
 
 // Enable Cors
 app.use((req, res, next) => {

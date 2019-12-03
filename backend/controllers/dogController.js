@@ -4,6 +4,26 @@ const fetch = require('node-fetch');
 // const Buffer = require('buffer/').Buffer
 const Dog = require('../models/dog.js')
 const User = require('../models/user.js')
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function(req, file, cb) {
+    console.log(file)
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+  }
+})
+
+const imageFilter = function(req, file, cb) {
+// accept image files only
+if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+return cb(new Error("Only image files are accepted!"), false);
+}
+cb(null, true);
+};
+const upload = multer({ storage: storage, fileFilter: imageFilter });
 
 //@route GET /dogs/
 //@description GET TOKEN from PetFinder API 
@@ -167,7 +187,7 @@ router.post('/adopt', async (req, res, next) => {
 //@route POST /dogs
 //@description User Looking to Rehome their dog Routes - This route will show a form of dog criteria for the user to fill out in order to create a profile for their dog to be inserted into the rehoming section
 //@access restricted
-router.post('/new', async (req, res, next) => {
+router.post('/new', upload.single('image'), async (req, res, next) => {
     console.log(req.session);
     try {
         if (req.body.good_with_children === 'on') {
@@ -202,7 +222,7 @@ router.post('/new', async (req, res, next) => {
                 good_with_children: req.body.good_with_children,
                 good_with_dogs: req.body.good_with_dogs,
                 good_with_cats: req.body.good_with_cats,
-                image: req.body.image
+                image: req.file
             }
             const savedDog = await Dog.create(dog)
             res.json(savedDog)
