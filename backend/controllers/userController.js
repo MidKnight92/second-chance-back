@@ -4,17 +4,6 @@ const User = require('../models/user.js')
 const Dog = require('../models/dog.js')
 const bcrypt = require('bcryptjs')
 
-//ROUTE GET TOKEN for the current_user
-// fetch("https://api.petfinder.com/v2/oauth2/token", {
-//   body: "grant_type=client_credentials&client_id=BOdMR5MM6RvzADgJLhqD5059rJdbQtVfoi5aQP6k8byGhcBNzC&client_secret=XsTu5afAhyqzyEnNYtt9xSrif3Uy7DcgrpEl5Z9u",
-//   headers: {
-//     "Content-Type": "application/x-www-form-urlencoded"
-//   },
-//   method: "POST"
-// })
-
-// this request gives me back a token so I can update the user token.
-
 
 //@route GET /users/
 //@description test route
@@ -61,6 +50,7 @@ router.post('/register', async (req, res, next) => {
 			req.session.loggedIn = true
 			req.session.userId = createdUser._id
 			req.session.username = createdUser.username
+			req.session.location = createdUser.zip_code
 			// res.redirect('/')
 			res.json(createdUser)
 		}
@@ -102,6 +92,7 @@ router.post('/login', async (req, res, next) => {
                 req.session.loggedIn = true
                 req.session.userId = foundUsers[0]._id
                 req.session.username = foundUsers[0].username
+                req.session.location = foundUsers[0].zip_code
                 req.session.message = 'Success'
             	console.log('This is req.session:', req.session, '\nThis is req.body:', req.body);
                 // res.redirect('/register')

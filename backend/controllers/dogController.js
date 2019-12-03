@@ -21,6 +21,7 @@ router.get('/', async (req, res, next) => {
 
     const json = await response.json();
     res.send(json['access_token']);
+    console.log(json['access_token']);
 
 })
 
@@ -31,7 +32,7 @@ router.get('/', async (req, res, next) => {
 //@access public
 router.get('/shelter', async (req, res, next) => {
     console.log("I'm hitting the shelter route.");
-    const url = 'https://api.petfinder.com/v2/animals?type=dog&color=black';
+    const url = 'https://api.petfinder.com/v2/animals?type=dog';
     const response = await fetch(url, {
         headers: {
             authorization: `${process.env.TOKEN_TYPE} ${process.env.ACCESS_TOKEN}`
@@ -94,6 +95,7 @@ const requireAuth = (req, res, next) => {
         next()
     }
 }
+
 // All routes below will now requireAuth
 router.use(requireAuth)
 
@@ -107,6 +109,7 @@ router.use(requireAuth)
 //@description User Looking to adopt dog, the form
 //@access restricted
 router.post('/adopt', async (req, res, next) => {
+	console.log('Hitting the adopt route - this should return matches');
     console.log(req.session);
     try {
         if (req.body.good_with_children === 'on') {
@@ -139,7 +142,7 @@ router.post('/adopt', async (req, res, next) => {
             //     good_with_dogs: req.body.good_with_dogs,
             //     good_with_cats: req.body.good_with_cats,
             // }
-            const url = `https://api.petfinder.com/v2/animals?type=dog&color=black&breed=${req.body.breed}&size=${req.body.size}&age=${req.body.age}&coat=${req.body.coat}&good_with_children=${req.body.good_with_children}&good_with_dogs=${req.body.good_with_dogs}&good_with_cats=${req.body.good_with_cats}`;
+            const url = `https://api.petfinder.com/v2/animals?type=dog&breed=${req.body.breed}&size=${req.body.size}&age=${req.body.age}&coat=${req.body.coat}&good_with_children=${req.body.good_with_children}&good_with_dogs=${req.body.good_with_dogs}&good_with_cats=${req.body.good_with_cats}&location=${req.session.location}&status=adoptable&distance=${500}`;
             const response = await fetch(url, {
                 headers: {
                     authorization: `${process.env.TOKEN_TYPE} ${process.env.ACCESS_TOKEN}`
