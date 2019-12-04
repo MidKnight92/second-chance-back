@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
-class Register extends Component {
+class RegisterForm extends Component {
     constructor() {
         super();
 
@@ -97,4 +97,4 @@ class Register extends Component {
 
 
 
-export default Register;
+export default RegisterForm;
