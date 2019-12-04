@@ -1,20 +1,16 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
+import Register from './components/RegisterForm.js'
+import Adopt from './components/AdoptForm.js'
 
-const NF404 = () => {
-  return (
-    <div>
-    <h1>404 Error - Page Not Found</h1>
-    </div>
-    )
-};
+
 const App = () => {
   return(
     <main>
-    <Navbar />
       <Switch>
-      <Route path='' component={NF404} />
+      <Route path='/users/register' component={ Register } />
+      <Route path='/dogs/adopt' component={ Adopt } />
       </Switch>
     </main>
     )
