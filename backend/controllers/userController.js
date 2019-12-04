@@ -77,7 +77,6 @@ router.get('/login', (req, res) => {
 //@access public
 router.post('/login', async (req, res, next) => {
     try {
-    	console.log(req.body);
         const foundUsers = await User.find({
             username: req.body.username
         })
@@ -87,14 +86,12 @@ router.post('/login', async (req, res, next) => {
             // res.redirect('/users/login')
         } else {
             const password = req.body.password
-            console.log('This is the password', password);
             if (bcrypt.compareSync(password, foundUsers[0].password)) {
                 req.session.loggedIn = true
                 req.session.userId = foundUsers[0]._id
                 req.session.username = foundUsers[0].username
                 req.session.location = foundUsers[0].zip_code
                 req.session.message = 'Success'
-            	console.log('This is req.session:', req.session, '\nThis is req.body:', req.body);
                 // res.redirect('/register')
                 res.json(foundUsers[0])
             } else {

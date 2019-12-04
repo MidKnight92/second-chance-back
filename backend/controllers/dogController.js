@@ -56,10 +56,7 @@ let token = async (req, res, next) => {
         },
         method: "POST"
     })
-    console.log('token function');
     const json = await response.json();
-    // res.send(json['access_token']);
-    console.log(json['access_token']);
     tk.push(json['access_token'])
     return json['access_token'];
 }
@@ -68,12 +65,9 @@ let tk = []
 token();
 
 interval(async () => {
-    console.log("I'm in interval hope this works!!!!!!");
-    // let globalToken = undefined;
     await token()
 }, 3600000)
 
-// console.log('THIS IS THE globalToken:', globalToken);
 
 // router.use("/shelter", token)
 //@route GET /dogs/shelter
@@ -82,9 +76,6 @@ interval(async () => {
 router.get('/shelter', async (req, res, next) => {
     try {
         console.log("I'm hitting the shelter route.");
-    	console.log('THIS IS TK',tk[tk.length-1]);
-        // let token = await globalToken
-        // console.log(token);
         const url = 'https://api.petfinder.com/v2/animals?type=dog';
         const response = await fetch(url, {
             headers: {
@@ -92,17 +83,8 @@ router.get('/shelter', async (req, res, next) => {
             },
             method: "GET"
         })
-
-        // if (response code == 200){
         const json = await response.json();
         res.send(json)
-        // res.send('cool')
-
-        // }
-        // else {
-        // 	// get new token
-        // 	// and get a list of dogs with new token
-        // }
     } catch (err) {
         next(err)
     }
@@ -115,8 +97,6 @@ router.get('/shelter', async (req, res, next) => {
 router.get('/shelter/:id', async (req, res, next) => {
     try {
         console.log("I'm hitting the shelter id route.");
-        // let token = await globalToken
-        console.log(tk[tk.length-1]);
         const url = `https://api.petfinder.com/v2/animals/${req.params.id}`;
         const response = await fetch(url, {
             headers: {
@@ -182,40 +162,28 @@ router.use(requireAuth)
 router.post('/adopt', async (req, res, next) => {
     console.log('Hitting the adopt route - this should return matches');
     console.log(tk[tk.length-1]);
-    // console.log(req.session);
-    // let token = await globalToken
-    // console.log(token);
     try {
-        if (req.body.good_with_children === 'on') {
-            req.body.good_with_children = true;
-        } else {
-            req.body.good_with_children = false;
-        }
-        if (req.body.good_with_dogs === 'on') {
-            req.body.good_with_dogs = true;
-        } else {
-            req.body.good_with_dogs = false;
-        }
-        if (req.body.good_with_cats === 'on') {
-            req.body.good_with_cats = true;
-        } else {
-            req.body.good_with_cats = false;
-        }
-        if (req.body.adopted === 'on') {
-            req.body.adopted = true;
-        } else {
-            req.body.adopted = false;
-        }
+        // if (req.body.good_with_children === 'on') {
+        //     req.body.good_with_children = true;
+        // } else {
+        //     req.body.good_with_children = false;
+        // }
+        // if (req.body.good_with_dogs === 'on') {
+        //     req.body.good_with_dogs = true;
+        // } else {
+        //     req.body.good_with_dogs = false;
+        // }
+        // if (req.body.good_with_cats === 'on') {
+        //     req.body.good_with_cats = true;
+        // } else {
+        //     req.body.good_with_cats = false;
+        // }
+        // if (req.body.adopted === 'on') {
+        //     req.body.adopted = true;
+        // } else {
+        //     req.body.adopted = false;
+        // }
         if (req.session.loggedIn === true) {
-            // const dog = {
-            //     breed: req.body.breed,
-            //     size: req.body.size,
-            //     age: req.body.age,
-            //     coat: req.body.coat,
-            //     good_with_children: req.body.good_with_children,
-            //     good_with_dogs: req.body.good_with_dogs,
-            //     good_with_cats: req.body.good_with_cats,
-            // }
             const url = `https://api.petfinder.com/v2/animals?type=dog&breed=${req.body.breed}&size=${req.body.size}&age=${req.body.age}&coat=${req.body.coat}&good_with_children=${req.body.good_with_children}&good_with_dogs=${req.body.good_with_dogs}&good_with_cats=${req.body.good_with_cats}&location=${req.session.location}&status=adoptable&distance=${500}`;
             const response = await fetch(url, {
                 headers: {
@@ -244,26 +212,26 @@ router.post('/adopt', async (req, res, next) => {
 router.post('/new', upload.single('image'), async (req, res, next) => {
     console.log(req.session);
     try {
-        if (req.body.good_with_children === 'on') {
-            req.body.good_with_children = true;
-        } else {
-            req.body.good_with_children = false;
-        }
-        if (req.body.good_with_dogs === 'on') {
-            req.body.good_with_dogs = true;
-        } else {
-            req.body.good_with_dogs = false;
-        }
-        if (req.body.good_with_cats === 'on') {
-            req.body.good_with_cats = true;
-        } else {
-            req.body.good_with_cats = false;
-        }
-        if (req.body.adopted === 'on') {
-            req.body.adopted = true;
-        } else {
-            req.body.adopted = false;
-        }
+        // if (req.body.good_with_children === 'on') {
+        //     req.body.good_with_children = true;
+        // } else {
+        //     req.body.good_with_children = false;
+        // }
+        // if (req.body.good_with_dogs === 'on') {
+        //     req.body.good_with_dogs = true;
+        // } else {
+        //     req.body.good_with_dogs = false;
+        // }
+        // if (req.body.good_with_cats === 'on') {
+        //     req.body.good_with_cats = true;
+        // } else {
+        //     req.body.good_with_cats = false;
+        // }
+        // if (req.body.adopted === 'on') {
+        //     req.body.adopted = true;
+        // } else {
+        //     req.body.adopted = false;
+        // }
         if (req.session.loggedIn === true) {
             const dog = {
                 user: req.session.userId,
@@ -342,7 +310,7 @@ router.put('/:id', async (req, res, next) => {
         }
         const dog = await Dog.findByIdAndUpdate(req.params.id, updatedDogInfo)
         // res.redirect('/dogs/:id')
-        res.json('Dog updated')
+        res.json(dog)
     } catch (err) {
         res.status(400).json('Error' + err)
         next(err)
