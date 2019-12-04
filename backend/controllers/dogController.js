@@ -25,12 +25,29 @@ cb(null, true);
 };
 const upload = multer({ storage: storage, fileFilter: imageFilter });
 
+
 //@route GET /dogs/
 //@description GET TOKEN from PetFinder API 
 //@access public 
-router.get('/', async (req, res, next) => {
-    console.log("I'm hitting the route");
-    const url = "https://api.petfinder.com/v2/oauth2/token";
+// router.get('/', async (req, res, next) => {
+//     console.log("I'm hitting the route");
+//     const url = "https://api.petfinder.com/v2/oauth2/token";
+//     const response = await fetch(url, {
+//         body: `grant_type=client_credentials&client_id=${process.env.API_KEY}&client_secret=${process.env.SECRET}`,
+//         headers: {
+//             "Content-Type": "application/x-www-form-urlencoded"
+//         },
+//         method: "POST"
+//     })
+
+//     const json = await response.json();
+//     res.send(json['access_token']);
+//     console.log(json['access_token']);
+
+// })
+
+let token = async (req, res, next) => {
+	const url = "https://api.petfinder.com/v2/oauth2/token";
     const response = await fetch(url, {
         body: `grant_type=client_credentials&client_id=${process.env.API_KEY}&client_secret=${process.env.SECRET}`,
         headers: {
@@ -38,29 +55,54 @@ router.get('/', async (req, res, next) => {
         },
         method: "POST"
     })
-
+    console.log('token function');
     const json = await response.json();
-    res.send(json['access_token']);
+    // res.send(json['access_token']);
     console.log(json['access_token']);
+    return json['access_token'];
+}
 
-})
+// setInterval(function(){
+// 	let newToken = token();
+// }, 3600000)
 
+let globalToken = token();
 
+setInterval(function(promise){
+	console.log(promise);
+	token();
+	console.log('just ran');
+}, 60000)
 
+// console.log('THIS IS THE globalToken:', globalToken);
+
+// router.use("/shelter", token)
 //@route GET /dogs/shelter
 //@description Shelter Dogs Index - using PetFinder API
 //@access public
 router.get('/shelter', async (req, res, next) => {
+	let token = await globalToken
     console.log("I'm hitting the shelter route.");
+	console.log(token);
     const url = 'https://api.petfinder.com/v2/animals?type=dog';
     const response = await fetch(url, {
         headers: {
-            authorization: `${process.env.TOKEN_TYPE} ${process.env.ACCESS_TOKEN}`
+            authorization: `${process.env.TOKEN_TYPE} ${token}`
         },
         method: "GET"
     })
-    const json = await response.json();
-    res.send(json)
+
+    // if (response code == 200){
+	    const json = await response.json();
+	    res.send(json)
+	    // res.send('cool')
+
+    // }
+    // else {
+    // 	// get new token
+    // 	// and get a list of dogs with new token
+    // }
+    token = undefined;
 })
 
 //@route GET /dogs/shelter/:id
@@ -69,10 +111,12 @@ router.get('/shelter', async (req, res, next) => {
 // GET https://api.petfinder.com/v2/animals/{id}
 router.get('/shelter/:id', async (req, res, next) => {
     console.log("I'm hitting the shelter id route.");
+    let token = await globalToken
+	console.log(token);
     const url = `https://api.petfinder.com/v2/animals/${req.params.id}`;
     const response = await fetch(url, {
         headers: {
-            authorization: `${process.env.TOKEN_TYPE} ${process.env.ACCESS_TOKEN}`
+            authorization: `${process.env.TOKEN_TYPE} ${token}`
         },
         method: "GET"
     })
@@ -130,7 +174,9 @@ router.use(requireAuth)
 //@access restricted
 router.post('/adopt', async (req, res, next) => {
 	console.log('Hitting the adopt route - this should return matches');
-    console.log(req.session);
+    // console.log(req.session);
+    let token = await globalToken
+	// console.log(token);
     try {
         if (req.body.good_with_children === 'on') {
             req.body.good_with_children = true;
@@ -165,7 +211,7 @@ router.post('/adopt', async (req, res, next) => {
             const url = `https://api.petfinder.com/v2/animals?type=dog&breed=${req.body.breed}&size=${req.body.size}&age=${req.body.age}&coat=${req.body.coat}&good_with_children=${req.body.good_with_children}&good_with_dogs=${req.body.good_with_dogs}&good_with_cats=${req.body.good_with_cats}&location=${req.session.location}&status=adoptable&distance=${500}`;
             const response = await fetch(url, {
                 headers: {
-                    authorization: `${process.env.TOKEN_TYPE} ${process.env.ACCESS_TOKEN}`
+                    authorization: `${process.env.TOKEN_TYPE} ${token}`
                 },
                 method: "GET"
             })
