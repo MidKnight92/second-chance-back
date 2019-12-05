@@ -7,19 +7,23 @@ import AdoptForm from './components/AdoptForm.js'
 import NavBar from './components/NavBar.js'
 import Carousel from './components/Carousel.js'
 import RehomeIndex from './components/RehomeIndex.js'
+import RehomeForm from './components/RehomeForm.js'
 
 
 const App = () => {
   return(
-      <main>
-        <NavBar />
-        <Switch>
-        <Route path='/home' component={ Carousel } />
-        <Route path='/dogs/rehome' component={ RehomeIndex } />
-        <Route path='/users/register' component={ RegisterForm } />
-        <Route path='/dogs/adopt' component={ AdoptForm } />
-        </Switch>
-      </main>
+    <React.Fragment>
+          <NavBar />
+          <main>
+            <Switch>
+            <Route path='/home' component={ Carousel } />
+            <Route path='/dogs/rehome' component={ RehomeIndex } />
+            <Route path='/users/register' component={ RegisterForm } />
+            <Route path='/dogs/adopt' component={ AdoptForm } />
+            <Route path='/dogs/new' component={ RehomeForm } />
+            </Switch>
+          </main>
+      </React.Fragment>
     )
 }
 

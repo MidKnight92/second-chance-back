@@ -164,26 +164,26 @@ router.post('/adopt', async (req, res, next) => {
     console.log('Hitting the adopt route - this should return matches');
     console.log(tk[tk.length-1]);
     try {
-        // if (req.body.good_with_children === 'on') {
-        //     req.body.good_with_children = true;
-        // } else {
-        //     req.body.good_with_children = false;
-        // }
-        // if (req.body.good_with_dogs === 'on') {
-        //     req.body.good_with_dogs = true;
-        // } else {
-        //     req.body.good_with_dogs = false;
-        // }
-        // if (req.body.good_with_cats === 'on') {
-        //     req.body.good_with_cats = true;
-        // } else {
-        //     req.body.good_with_cats = false;
-        // }
-        // if (req.body.adopted === 'on') {
-        //     req.body.adopted = true;
-        // } else {
-        //     req.body.adopted = false;
-        // }
+        if (req.body.good_with_children === 'on') {
+            req.body.good_with_children = true;
+        } else {
+            req.body.good_with_children = false;
+        }
+        if (req.body.good_with_dogs === 'on') {
+            req.body.good_with_dogs = true;
+        } else {
+            req.body.good_with_dogs = false;
+        }
+        if (req.body.good_with_cats === 'on') {
+            req.body.good_with_cats = true;
+        } else {
+            req.body.good_with_cats = false;
+        }
+        if (req.body.adopted === 'on') {
+            req.body.adopted = true;
+        } else {
+            req.body.adopted = false;
+        }
         if (req.session.loggedIn === true) {
             const url = `https://api.petfinder.com/v2/animals?type=dog&breed=${req.body.breed}&size=${req.body.size}&age=${req.body.age}&coat=${req.body.coat}&good_with_children=${req.body.good_with_children}&good_with_dogs=${req.body.good_with_dogs}&good_with_cats=${req.body.good_with_cats}&location=${req.session.location}&status=adoptable&distance=${500}`;
             const response = await fetch(url, {
@@ -213,26 +213,26 @@ router.post('/adopt', async (req, res, next) => {
 router.post('/new', upload.single('image'), async (req, res, next) => {
     console.log(req.session);
     try {
-        // if (req.body.good_with_children === 'on') {
-        //     req.body.good_with_children = true;
-        // } else {
-        //     req.body.good_with_children = false;
-        // }
-        // if (req.body.good_with_dogs === 'on') {
-        //     req.body.good_with_dogs = true;
-        // } else {
-        //     req.body.good_with_dogs = false;
-        // }
-        // if (req.body.good_with_cats === 'on') {
-        //     req.body.good_with_cats = true;
-        // } else {
-        //     req.body.good_with_cats = false;
-        // }
-        // if (req.body.adopted === 'on') {
-        //     req.body.adopted = true;
-        // } else {
-        //     req.body.adopted = false;
-        // }
+        if (req.body.good_with_children === 'on') {
+            req.body.good_with_children = true;
+        } else {
+            req.body.good_with_children = false;
+        }
+        if (req.body.good_with_dogs === 'on') {
+            req.body.good_with_dogs = true;
+        } else {
+            req.body.good_with_dogs = false;
+        }
+        if (req.body.good_with_cats === 'on') {
+            req.body.good_with_cats = true;
+        } else {
+            req.body.good_with_cats = false;
+        }
+        if (req.body.adopted === 'on') {
+            req.body.adopted = true;
+        } else {
+            req.body.adopted = false;
+        }
         if (req.session.loggedIn === true) {
             const dog = {
                 user: req.session.userId,
@@ -296,6 +296,26 @@ router.get('/:id/edit', async (req, res, next) => {
 //@access restricted
 router.put('/:id', async (req, res, next) => {
     try {
+        if (req.body.good_with_children === 'on') {
+            req.body.good_with_children = true;
+        } else {
+            req.body.good_with_children = false;
+        }
+        if (req.body.good_with_dogs === 'on') {
+            req.body.good_with_dogs = true;
+        } else {
+            req.body.good_with_dogs = false;
+        }
+        if (req.body.good_with_cats === 'on') {
+            req.body.good_with_cats = true;
+        } else {
+            req.body.good_with_cats = false;
+        }
+        if (req.body.adopted === 'on') {
+            req.body.adopted = true;
+        } else {
+            req.body.adopted = false;
+        }
         const updatedDogInfo = {
             user: req.session.userId,
             name: req.body.name,
