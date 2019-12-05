@@ -8,7 +8,7 @@ import NavBar from './components/NavBar.js'
 import Carousel from './components/Carousel.js'
 import RehomeIndex from './components/RehomeIndex.js'
 import RehomeForm from './components/RehomeForm.js'
-
+import Login from './components/Login.js'
 
 const App = () => {
   return(
@@ -21,6 +21,7 @@ const App = () => {
             <Route path='/users/register' component={ RegisterForm } />
             <Route path='/dogs/adopt' component={ AdoptForm } />
             <Route path='/dogs/new' component={ RehomeForm } />
+            <Route path='/users/login' component={ Login } />
             </Switch>
           </main>
       </React.Fragment>

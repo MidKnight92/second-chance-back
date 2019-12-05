@@ -10,8 +10,8 @@ function RehomeIndex(argument) {
 					<Card body outline color="secondary">
 					<CardImg top width="100" className="rounded" src="https://i.dailymail.co.uk/1s/2019/11/23/09/21370544-7717313-image-a-1_1574501083030.jpg" alt="#"/>	
 					<CardBody>
-						<CardTitle>Name from api props</CardTitle>
-						<CardSubtitle>CardSubtitle</CardSubtitle>
+						<CardTitle> Dog Name from api props</CardTitle>
+						<CardSubtitle>Breed</CardSubtitle>
 						<CardText>description</CardText>
 						<Button>Info</Button>
 					</CardBody>

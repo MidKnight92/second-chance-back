@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Container } from 'reactstrap';
 
+// Need to add logic that will switch the text and functionality to logged out when user is logged in
 
 class NavBar extends Component {
 	constructor(props){
@@ -36,7 +37,7 @@ class NavBar extends Component {
 	            </NavItem>
 
 	            <NavItem>
-	              <NavLink href="#">Login</NavLink>
+	              <NavLink href="http://localhost:3000/users/login">Login</NavLink>
 	            </NavItem>
 	          </Nav>
 	        </Collapse>
