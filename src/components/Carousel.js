@@ -7,6 +7,7 @@ const items = [
     altText: 'Cute dog running in the snow. Photo by Patrick Hendry on Unsplash',
     caption: 'Register today to find the right dog for you!',
     header: 'Looking to Adopt?',
+    fill:'%23fff',
     key: '1'
   },
   {
@@ -14,6 +15,7 @@ const items = [
     altText: 'Cute dog name Huey. Photo by Justin Veenema on Unsplash',
     caption: 'Slide 2',
     header: 'Slide 2 Header',
+    fill:'%23fff',
     key: '2'
   },
   {
@@ -25,6 +27,6 @@ const items = [
   }
 ];
 
-const Carousel = () => <Container><UncontrolledCarousel className="carousel" items={items}/> </Container>;
+const Carousel = () => <Container><UncontrolledCarousel className="carousel" captionText={items.caption} captionHeader={items.header} items={items}/> </Container>;
 
 export default Carousel;
