@@ -72,7 +72,7 @@ class RegisterForm extends Component {
                 <legend className="col-form-label col-sm-2">Are you...</legend>
                 <Col sm={10}>
                     <Label check>
-                        <Input type="radio" name="radio1" value="on"/>{' '}
+                        <Input type="radio" name="adopting" value="on"/>{' '}
                         Looking to adopt a dog? 
                     </Label>
                 </Col>  
@@ -80,7 +80,7 @@ class RegisterForm extends Component {
                 <FormGroup tag="fieldset" row check>
                 <Col sm={10}>
                     <Label check>
-                        <Input type="radio" name="radio1" value="on"/>{' '}
+                        <Input type="radio" name="adopting" value="off"/>{' '}
                         Looking to rehome a dog? 
                     </Label>
                 </Col>  

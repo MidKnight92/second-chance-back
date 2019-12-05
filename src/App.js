@@ -14,8 +14,8 @@ const App = () => {
       <main>
         <NavBar />
         <Switch>
-        <Route path='/home' component={Carousel} />
-        <Route path='dogs/rehome' component={RehomeIndex} />
+        <Route path='/home' component={ Carousel } />
+        <Route path='/dogs/rehome' component={ RehomeIndex } />
         <Route path='/users/register' component={ RegisterForm } />
         <Route path='/dogs/adopt' component={ AdoptForm } />
         </Switch>

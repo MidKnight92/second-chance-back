@@ -5,3 +5,7 @@
  color: black;
  font-weight: bolder;
 }
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
