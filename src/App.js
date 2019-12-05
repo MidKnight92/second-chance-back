@@ -6,6 +6,7 @@ import RegisterForm from './components/RegisterForm.js'
 import AdoptForm from './components/AdoptForm.js'
 import NavBar from './components/NavBar.js'
 import Carousel from './components/Carousel.js'
+import RehomeIndex from './components/RehomeIndex.js'
 
 
 const App = () => {
@@ -13,7 +14,8 @@ const App = () => {
       <main>
         <NavBar />
         <Switch>
-        <Route path='/' component={Carousel} />
+        <Route path='/home' component={Carousel} />
+        <Route path='dogs/rehome' component={RehomeIndex} />
         <Route path='/users/register' component={ RegisterForm } />
         <Route path='/dogs/adopt' component={ AdoptForm } />
         </Switch>

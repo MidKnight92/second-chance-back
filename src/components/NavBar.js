@@ -19,7 +19,7 @@ class NavBar extends Component {
 		<div>
 	      <Navbar color="dark" dark expand="sm" className="mb-5">
 	       <Container>
-	       	 <NavbarBrand href="/" className="mr-auto">Second Chance</NavbarBrand>
+	       	 <NavbarBrand href="/home" className="mr-auto">Second Chance</NavbarBrand>
 	        <NavbarToggler onClick={this.toggle} />
 	        <Collapse isOpen={this.state.isOpen} navbar>
 	          <Nav className="ml-auto" navbar>
@@ -28,13 +28,13 @@ class NavBar extends Component {
 	            </NavItem>
 	            
 	            <NavItem>
-	              <NavLink href="#">Rehome Dogs</NavLink>
+	              <NavLink href="http://localhost:3000/dogs/rehome">Rehome Dogs</NavLink>
 	            </NavItem>
 
 	            <NavItem>
 	              <NavLink href="http://localhost:3000/users/register">Register</NavLink>
 	            </NavItem>
-	            
+
 	            <NavItem>
 	              <NavLink href="#">Login</NavLink>
 	            </NavItem>
