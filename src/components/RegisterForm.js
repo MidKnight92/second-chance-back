@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Col, Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 
 class RegisterForm extends Component {
     constructor() {
@@ -41,51 +41,55 @@ class RegisterForm extends Component {
     render() {
         return (
             <Form onSubmit={this.handleSubmit}>
-            	<h1>Welcome</h1>
-            	<FormGroup row>
-    				<Label sm={2}>Username</Label>
-    				<Col sm={10}>
-    				<Input type="text" name="username" placeholder="username" onChange={this.handleChange}/>
-    				</Col>
-    			</FormGroup>
-    			<FormGroup row>
-    				<Label sm={2}>Email</Label>
-    				<Col sm={10}>
-    				<Input type="email" name="email" placeholder="email" onChange={this.handleChange}/>
-    				</Col>
-    			</FormGroup>
-    			<FormGroup row>
-    				<Label sm={2}>Password</Label>
-    				<Col sm={10}>
-    				<Input type="password" name="password" placeholder="password" onChange={this.handleChange}/>
-    				</Col>
-    			</FormGroup>
-    			<FormGroup row>
-    				<Label sm={2}>Zip Code</Label>
-    				<Col sm={10}>
-    				<Input type="text" name="zip_code" placeholder="zip code" onChange={this.handleChange}/>
-    				</Col>
-    			</FormGroup>
-    			<FormGroup tag="fieldset" row check>
-    			<legend className="col-form-label col-sm-2">Are you...</legend>
-    			<Col sm={10}>
-    				<Label check>
-    					<Input type="radio" name="radio1" />{' '}
-    					Looking to adopt a dog? 
-    				</Label>
-    			</Col>	
-    			</FormGroup>
-    			<FormGroup tag="fieldset" row check>
-    			<Col sm={10}>
-    				<Label check>
-    					<Input type="radio" name="radio1" />{' '}
-    					Looking to rehome a dog? 
-    				</Label>
-    			</Col>	
-    			</FormGroup>
-    			 <Col sm={{ size: 10, offset: 2 }}>
-		          <Button>Sign Up</Button>
-		        </Col>
+            	<Container>
+                    <h1>Welcome to the pack</h1>
+                    <br />
+                <FormGroup row>
+                    <Label sm={2}>Username:</Label>
+                    <Col sm={10}>
+                    <Input type="text" name="username" placeholder="username" onChange={this.handleChange}/>
+                    </Col>
+                </FormGroup>
+                <FormGroup row>
+                    <Label sm={2}>Email:</Label>
+                    <Col sm={10}>
+                    <Input type="email" name="email" placeholder="email" onChange={this.handleChange}/>
+                    </Col>
+                </FormGroup>
+                <FormGroup row>
+                    <Label sm={2}>Password:</Label>
+                    <Col sm={10}>
+                    <Input type="password" name="password" placeholder="password" onChange={this.handleChange}/>
+                    </Col>
+                </FormGroup>
+                <FormGroup row>
+                    <Label sm={2}>Zip Code:</Label>
+                    <Col sm={10}>
+                    <Input type="text" name="zip_code" placeholder="zip code" onChange={this.handleChange}/>
+                    </Col>
+                </FormGroup>
+                <FormGroup tag="fieldset" row check>
+                <legend className="col-form-label col-sm-2">Are you...</legend>
+                <Col sm={10}>
+                    <Label check>
+                        <Input type="radio" name="radio1" value="on"/>{' '}
+                        Looking to adopt a dog? 
+                    </Label>
+                </Col>  
+                </FormGroup>
+                <FormGroup tag="fieldset" row check>
+                <Col sm={10}>
+                    <Label check>
+                        <Input type="radio" name="radio1" value="on"/>{' '}
+                        Looking to rehome a dog? 
+                    </Label>
+                </Col>  
+                </FormGroup>
+                 <Col sm={{ size: 3 }}>
+                 <br />
+                  <Button>Sign Up</Button>
+                </Col>
+                </Container>
     		</Form>
         )
 

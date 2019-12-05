@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Col, Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 
 function AdoptForm() {
     return (
         <Form>
-			<h1>Let's Find Your New Member of the Family</h1>
+			<Container>
+				<h1>Let's Find Your New Member of the Family</h1>
+				<br />
 				<FormGroup row>
-					<Label sm={2}>Breed</Label>
+					<Label sm={2}>Breed:</Label>
 					<Col sm={10}>
           			<Input type="select" name="breed">
           				<option value="Affenpinscher">Affenpinscher</option>
@@ -270,7 +272,7 @@ function AdoptForm() {
         			</Col>
 				</FormGroup>
 				<FormGroup row>
-					<Label sm={2}>Size</Label>
+					<Label sm={2}>Size:</Label>
 					<Col sm={10}>
           			<Input type="select" name="size">
           			<option value="small">Small</option>
@@ -281,7 +283,7 @@ function AdoptForm() {
         			</Col>
 				</FormGroup>
 				<FormGroup row>
-					<Label sm={2}>Age</Label>
+					<Label sm={2}>Age:</Label>
 					<Col sm={10}>
           			<Input type="select" name="age">
           			<option value="baby">Baby</option>
@@ -292,7 +294,7 @@ function AdoptForm() {
         			</Col>
 				</FormGroup>
 				<FormGroup row>
-					<Label sm={2}>Coat</Label>
+					<Label sm={2}>Coat:</Label>
 					<Col sm={10}>
           			<Input type="select" name="coat">
           			<option value="short">Short</option>
@@ -304,18 +306,18 @@ function AdoptForm() {
         			</Col>
 				</FormGroup>
 				<FormGroup tag="fieldset" row check>
-    			<legend className="col-form-label col-sm-2">Does your dog need to be:</legend>
+    			<legend className="col-form-label">Does your dog need to be:</legend>
     			<Col sm={10}>
     				<Label check>
-    					<Input type="radio" name="radio1" />{' '}
-    					Good with kids? 
+    					<Input type="checkbox" name="good_with_children" value="on"/>{' '}
+    					Good with children? 
     				</Label>
     			</Col>	
     			</FormGroup>
     			<FormGroup tag="fieldset" row check>
     			<Col sm={10}>
     				<Label check>
-    					<Input type="radio" name="radio1" />{' '}
+    					{' '}<Input type="checkbox" name="good_with_dogs" value="on"/>
     					Good with dogs? 
     				</Label>
     			</Col>	
@@ -323,11 +325,16 @@ function AdoptForm() {
     			<FormGroup tag="fieldset" row check>
     			<Col sm={10}>
     				<Label check>
-    					<Input type="radio" name="radio1" />{' '}
+    					<Input type="checkbox" name="good_with_cats" value="on"/>{' '}
     					Good with cats? 
     				</Label>
     			</Col>	
-    			</FormGroup>		
+    			</FormGroup>
+    			<Col sm={{ size: 3 }}>
+    				<br />
+                  <Button>Fetch</Button>
+                </Col>
+			</Container>		
 		</Form>
     )
 }
