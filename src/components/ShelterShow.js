@@ -16,7 +16,7 @@ function ShelterShow(argument) {
 				</div>
 				<div className="col-md-8">	
 				<CardBody style={{textAlign: "center"}}>
-					<CardTitle style={{textTransform: "uppercase", fontWeight: "bolder"}}>Dogs name</CardTitle>
+					<CardTitle style={{textTransform: "uppercase", fontWeight: "bolder", textDecoration: "underline"}}>Dogs name</CardTitle>
 					<CardSubtitle>animal.description</CardSubtitle>
 					<CardText>animal.size</CardText>
 					<CardText>animal.breeds</CardText>

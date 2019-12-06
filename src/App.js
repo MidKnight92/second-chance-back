@@ -17,8 +17,8 @@ import ShelterIndex from './components/ShelterIndex.js'
 // Note to self: Don't Forget to put show paths before their index paths
 
 const App = () => {
-  return(
-    <React.Fragment>
+    return (
+        <React.Fragment>
           <NavBar />
           <main>
             <Switch>

@@ -4,20 +4,20 @@ import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Co
 // Need to add logic that will switch the text and functionality to logged out when user is logged in
 
 class NavBar extends Component {
-	constructor(props){
-		super(props);
-		this.state = {
-			isOpen: false
-		}
-	}
-	toggle = () => {
-		this.setState({
-			isOpen: !this.state.isOpen
-		});
-	}
-	render(){
-		return(
-		<div>
+    constructor(props) {
+        super(props);
+        this.state = {
+            isOpen: false
+        }
+    }
+    toggle = () => {
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
+    }
+    render() {
+        return (
+            <div>
 	      <Navbar color="dark" dark expand="sm" className="mb-5">
 	       <Container>
 	       	 <NavbarBrand href="/home" className="mr-auto">Second Chance</NavbarBrand>
@@ -44,8 +44,8 @@ class NavBar extends Component {
 	       </Container>
 	      </Navbar>
     </div>
-	)
-	}
+        )
+    }
 }
 
 export default NavBar;

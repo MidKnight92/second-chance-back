@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import {
-  Card, CardImg, CardText, CardBody, CardLink,
-  CardTitle, CardSubtitle, Container
+    Card,
+    CardImg,
+    CardText,
+    CardBody,
+    CardLink,
+    CardTitle,
+    CardSubtitle,
+    Container
 } from 'reactstrap';
 
 function RehomeShow(argument) {
-	return(
-		<Container>
+    return (
+        <Container>
 			<Card body outline mb="3" color="secondary">
 				<CardBody>
 					<CardTitle>Dogs name</CardTitle>
@@ -23,7 +29,7 @@ function RehomeShow(argument) {
 				</CardBody>
 			</Card>
 		</Container>
-	)
+    )
 }
 
 export default RehomeShow;

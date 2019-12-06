@@ -2,40 +2,40 @@ import React, { Component } from 'react';
 import { Col, Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 
 class Login extends Component {
-	constructor(){
-		super();
-		this.state = {
-			isLoggedIn: false,
-			username: '',
-			password: ''
-		}
-	}
-	handleChange = (e) => {
-		this.setState({
-			[e.currentTarget.name]: e.currentTarget.value
-		})	
-	}
-	handleSubmit = async (e) => {
-		e.preventDefault();
-		const loginResponse = await fetch(
-			process.env.REACT_APP_API_URL + '/users/login', {
-				method: 'POST',
-				credentials: 'include',
-				body: JSON.stringify(this.state),
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			});
-		const parsedResponse = await loginResponse.json();
-		if (parsedResponse.status.message === 'Success' ) {
-			this.props.history.push('/users/:id')
-		} else {
-			//tell them it was invalid 
-		}
-	}
-	render(){
-		return (
-			<Form onSubmit={this.handleSubmit}>
+    constructor() {
+        super();
+        this.state = {
+            isLoggedIn: false,
+            username: '',
+            password: ''
+        }
+    }
+    handleChange = (e) => {
+        this.setState({
+            [e.currentTarget.name]: e.currentTarget.value
+        })
+    }
+    handleSubmit = async (e) => {
+        e.preventDefault();
+        const loginResponse = await fetch(
+            process.env.REACT_APP_API_URL + '/users/login', {
+                method: 'POST',
+                credentials: 'include',
+                body: JSON.stringify(this.state),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        const parsedResponse = await loginResponse.json();
+        if (parsedResponse.status.message === 'Success') {
+            this.props.history.push('/users/:id')
+        } else {
+            //tell them it was invalid 
+        }
+    }
+    render() {
+        return (
+            <Form onSubmit={this.handleSubmit}>
 				<Container>
 					<h1>Welcome Back</h1>
 					<img className="center" width="50%" src="https://images.unsplash.com/photo-1559096996-73fc537f9296?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"/>
@@ -57,8 +57,8 @@ class Login extends Component {
                 </Col>
 				</Container>
 			</Form>
-		)
-	}
+        )
+    }
 
 }
 
