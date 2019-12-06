@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Col, Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 
+// Component Description (Public):
+// This is a register Form here we are collecting their info and determining if they are adopting or not. IF they are adopting they will be sent to the adoption form (Adopt.js - dogs/adopt) ELSE they will be sent to the rehoming form (Rehome.js - dogs/rehome).  
+
 class RegisterForm extends Component {
     constructor() {
         super();

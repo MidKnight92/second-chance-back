@@ -38,7 +38,7 @@ class Login extends Component {
 			<Form onSubmit={this.handleSubmit}>
 				<Container>
 					<h1>Welcome Back</h1>
-					<img className="center" src="https://images.unsplash.com/photo-1559096996-73fc537f9296?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"/>
+					<img className="center" width="50%" src="https://images.unsplash.com/photo-1559096996-73fc537f9296?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"/>
 					<FormGroup row>
                     <Label sm={2}>Username:</Label>
                     <Col sm={10}>

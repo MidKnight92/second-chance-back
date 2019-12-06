@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Col, Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 
+// Component Description (Private):
+// This is a Form Page that shows only if the users results return true for adopting. After clicking submit on this form they should be sent to their user matches page (UserMatches.js - /dogs/:id) to see how their profile looks.
+
 function AdoptForm() {
     return (
         <Form>

@@ -77,7 +77,7 @@ interval(async () => {
 router.get('/shelter', async (req, res, next) => {
     try {
         console.log("I'm hitting the shelter route.");
-        const url = 'https://api.petfinder.com/v2/animals?type=dog';
+        const url = `https://api.petfinder.com/v2/animals?type=dog&location=${60611}&status=adoptable&distance=${500}`;
         const response = await fetch(url, {
             headers: {
                 authorization: `${process.env.TOKEN_TYPE} ${tk[tk.length-1]}`
