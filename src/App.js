@@ -9,6 +9,7 @@ import Carousel from './components/Carousel.js'
 import RehomeIndex from './components/RehomeIndex.js'
 import RehomeForm from './components/RehomeForm.js'
 import Login from './components/Login.js'
+import Footer from './components/Footer.js'
 
 const App = () => {
   return(
@@ -24,6 +25,7 @@ const App = () => {
             <Route path='/users/login' component={ Login } />
             </Switch>
           </main>
+          <Footer />
       </React.Fragment>
     )
 }
