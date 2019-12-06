@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import {
-  Card, CardImg, CardText, CardBody, CardLink,
-  CardTitle, CardSubtitle, Container, Row
+    Card,
+    CardImg,
+    CardText,
+    CardBody,
+    CardLink,
+    CardTitle,
+    CardSubtitle,
+    Container,
+    Row
 } from 'reactstrap';
 
 
 
 function ShelterShow(argument) {
-	return(
-		<Container >
+    return (
+        <Container >
 			<Card className="mb-3"  body outline color="secondary">
 			<Row className="no-gutters">
 				<div className="col-md-4">
@@ -36,7 +43,7 @@ function ShelterShow(argument) {
 				</Row>
 			</Card>
 		</Container>
-	)
+    )
 }
 
 export default ShelterShow;
