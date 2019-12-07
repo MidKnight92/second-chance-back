@@ -6,6 +6,7 @@ const dogSchema = new mongoose.Schema({
 		ref: 'User'
 	},
 	name: {type: String, required: true},
+	description: String,
 	breed: String,
 	adopted: Boolean,
 	size: String,

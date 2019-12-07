@@ -4,7 +4,8 @@ import { Col, Button, Form, FormGroup, Label, Input, Container } from 'reactstra
 // Component Description (Private):
 // This is a Form Page that shows only if the users results return true for adopting. After clicking submit on this form they should be sent to their user matches page (UserMatches.js - /dogs/:id) to see how their profile looks.
 
-function AdoptForm() {
+function AdoptForm(props) {
+	console.log(props);
     return (
         <Form>
 			<Container>

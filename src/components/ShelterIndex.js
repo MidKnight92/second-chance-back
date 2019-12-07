@@ -10,7 +10,8 @@ import {
     Container,
     CardDeck,
     Row,
-    Col
+    Col,
+    Spinner
 } from 'reactstrap'
 
 // Component Description (Public):
@@ -32,7 +33,6 @@ class ShelterIndex extends Component {
                 method: "GET"
             });
             const parsedDogs = await dogs.json();
-            console.log(parsedDogs.animals);
             this.setState({
                 dogs: parsedDogs.animals
             })
@@ -42,28 +42,30 @@ class ShelterIndex extends Component {
     }
     render() {
     	let dogs
-    	// console.log("this.state.dogs", Boolean(this.state.dogs));
+    	console.log("this.state.dogs", Boolean(this.state.dogs));
     	{this.state.dogs 
     		?
 		    dogs = this.state.dogs.map((dog) => {
+		    	// console.log(dog)
 		    	return(
 						<CardDeck key={dog.id} className="no-gutters">
 							<Card body outline color="secondary" className="mb-4" >
 							<CardBody style={{textAlign: "justify"}}>
 							<div className="col-md-6">
-							<CardImg top width="100%" className="rounded" src={dog.photos.medium} alt="Cute Puppy"/>
+							<CardImg top width="100%" className="rounded" src={dog.photos[0]} alt="Cute Puppy"/>
 							</div>
 								<CardTitle style={{textTransform: "uppercase", fontWeight: "bolder", textDecoration: "underline"}}>{dog.name}</CardTitle>
 								<CardSubtitle>{dog.breeds.primary}</CardSubtitle>
 								<CardText>{dog.description}</CardText>
-								<Button color="primary">Info</Button>
+								<Button color="primary" onClick={() => this.props.history.push('/dogs/shelter/:id')}>Info</Button>
 							</CardBody>
 							</Card>
 						</CardDeck>
 		    	)
 		    })
 		    :
-		    dogs = null
+		    // console.log("this.state.dogs", Boolean(this.state.dogs));
+		    dogs = null 
     	}
         return (
 	        <Container>

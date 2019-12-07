@@ -237,6 +237,7 @@ router.post('/new', upload.single('image'), async (req, res, next) => {
             const dog = {
                 user: req.session.userId,
                 name: req.body.name,
+                destination: req.body.description,
                 breed: req.body.breed,
                 adopted: req.body.adopted,
                 size: req.body.size,
@@ -320,6 +321,7 @@ router.put('/:id', async (req, res, next) => {
             user: req.session.userId,
             name: req.body.name,
             breed: req.body.breed,
+            description: req.body.description,
             adopted: req.body.adopted,
             size: req.body.size,
             age: req.body.age,

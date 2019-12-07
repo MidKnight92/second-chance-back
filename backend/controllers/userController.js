@@ -99,7 +99,8 @@ router.post('/login', async (req, res, next) => {
                 req.session.location = foundUsers[0].zip_code
                 req.session.message = 'Success'
                 // res.redirect('/register')
-                res.json(foundUsers[0]).status(200)
+                res.status(200).json(foundUsers[0])
+                // res.json(foundUsers[0])
             } else {
                 req.session.message = 'Invalid username or password'
                 // res.redirect('/users/login')

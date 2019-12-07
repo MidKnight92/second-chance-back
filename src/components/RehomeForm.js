@@ -3,7 +3,8 @@ import { Col, Button, Form, FormGroup, FormText, Label, Input, Container } from 
 // Component Description (Private):
 // This is a Form Page that shows only if the users results return false for adopting - therefore they are looking to rehome their dog. After clicking submit on this form they should be sent to their dogs show page (Dog.js - /dogs/:id) to see how their profile looks.
 
-function RehomeForm() {
+function RehomeForm(props) {
+	console.log(props);
     return (
         <Form>
 			<Container>

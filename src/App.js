@@ -14,7 +14,14 @@ import Footer from './components/Footer.js'
 import ShelterShow from './components/ShelterShow.js'
 import ShelterIndex from './components/ShelterIndex.js'
 
-// Note to self: Don't Forget to put show paths before their index paths
+
+const NF = () => {
+  return (
+    <div style={{textAlign: 'center', fontWeight:'bolder'}}>
+      404 NOT FOUND
+    </div>
+    )
+};
 
 const App = () => {
     return (
@@ -24,13 +31,14 @@ const App = () => {
             <Switch>
             <Route path='/' exact component={ Carousel } />
             <Route path='/dogs/rehome/:id' component={ RehomeShow } />
-            <Route path='/dogs/rehome' component={ RehomeIndex } />
-            <Route path='/users/register' component={ RegisterForm } />
-            <Route path='/dogs/adopt' component={ AdoptForm } />
-            <Route path='/dogs/new' component={ RehomeForm } />
-            <Route path='/users/login' component={ Login } />
+            <Route path='/dogs/rehome' exact component={ RehomeIndex } />
+            <Route path='/users/register' exact component={ RegisterForm } />
+            <Route path='/dogs/adopt' exact component={ AdoptForm } />
+            <Route path='/dogs/new'exact component={ RehomeForm } />
+            <Route path='/users/login' exact component={ Login } />
             <Route path='/dogs/shelter/:id' component={ ShelterShow } />
-            <Route path='/dogs/shelter' component={ ShelterIndex } />
+            <Route path='/dogs/shelter' exact component={ ShelterIndex } />
+            <Route path='*' component ={ NF } />
             </Switch>
           </main>
           <Footer />

@@ -12,7 +12,8 @@ class Login extends Component {
     }
     handleChange = (e) => {
         this.setState({
-            [e.currentTarget.name]: e.currentTarget.value
+            [e.currentTarget.name]: e.currentTarget.value,
+            isLoggedIn: true
         })
     }
     handleSubmit = async (e) => {
@@ -27,10 +28,13 @@ class Login extends Component {
                 }
             });
         const parsedResponse = await loginResponse.json();
-        if (parsedResponse.status.message === 'Success') {
+        console.log(parsedResponse);
+        if (parsedResponse) {
+            console.log('It was a Success');
             this.props.history.push('/users/:id')
         } else {
-            //tell them it was invalid 
+            console.log('nope');
+           this.props.history.push('/users/login')
         }
     }
     render() {
@@ -46,9 +50,9 @@ class Login extends Component {
                     </Col>
                 </FormGroup>
                 <FormGroup row>
-                    <Label sm={2}>Email:</Label>
+                    <Label sm={2}>Password:</Label>
                     <Col sm={10}>
-                    <Input type="email" name="email" placeholder="email" onChange={this.handleChange}/>
+                    <Input type="password" name="password" placeholder="password" onChange={this.handleChange}/>
                     </Col>
                 </FormGroup>
                  <Col sm={{ size: 3 }}>
