@@ -21,7 +21,7 @@ function ShelterShow(props) {
 			<Card className="mb-3"  body outline color="secondary">
 			<Row className="no-gutters">
 				<div className="col-md-4">
-					<img width="100%" src={dog.photos[0].medium} alt="Dog needing to be adopted from Pet Finder API results"/>
+					<img width="100%" src={dog.photos.length > 0 ? dog.photos[0].medium : `https://cdn11.bigcommerce.com/s-dpaf5pw/images/stencil/original/products/148/658/PawStencilSmallNEW__06609.1544726380.jpg?c=2`} alt="Dog needing to be adopted from Pet Finder API results"/>
 				</div>
 				<div className="col-md-8">	
 				<CardBody style={{textAlign: "center"}}>
@@ -39,7 +39,7 @@ function ShelterShow(props) {
 					<CardText>{dog.contact.address.state}</CardText>
 					<CardText>{dog.contact.address.postcode}</CardText>
 					<CardText>{dog.contact.phone}</CardText>
-					<CardLink href="#">{dog.contact.email}</CardLink>
+					<CardLink href={dog.contact.email}>{dog.contact.email}</CardLink>
 				</CardBody>
 				</div>
 				</Row>
