@@ -54,7 +54,7 @@ class RehomeIndex extends Component {
 						</div>
 							<CardTitle style={{textTransform: "uppercase", fontWeight: "bolder", textDecoration: "underline"}}>{dog.name}</CardTitle>
 							<CardSubtitle>{dog.breed}</CardSubtitle>
-							<Button color="primary" onClick={() => this.props.history.push('/dogs/rehome/:id')}>Info</Button>
+							<Button color="primary" onClick={() => this.props.history.push(`/dogs/rehome/${dog.id}`)}>Info</Button>
 						</CardBody>
 						</Card>
 					</CardDeck>

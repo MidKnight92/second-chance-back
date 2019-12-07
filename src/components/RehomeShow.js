@@ -11,7 +11,8 @@ import {
     Row
 } from 'reactstrap';
 
-function RehomeShow(argument) {
+function RehomeShow(props) {
+	console.log('THIS IS PROPS IN RehomeShow\n', props);
     return (
         <Container>
 			<Card body outline mb="3" color="secondary">
