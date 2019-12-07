@@ -13,24 +13,25 @@ import {
 
 function RehomeShow(props) {
 	console.log('THIS IS PROPS IN RehomeShow\n', props);
+	const dog = props.location.state
     return (
         <Container>
 			<Card body outline mb="3" color="secondary">
 			<Row className="no-gutters">
 				<div className="col-md-4">
-					<img className="center" width="100%" src={`https://cdn11.bigcommerce.com/s-dpaf5pw/images/stencil/original/products/148/658/PawStencilSmallNEW__06609.1544726380.jpg?c=2`} alt="Dog needing to be adopted from my API results"/>
+					<img className="center" width="100%" src={dog.image ? dog.image :`https://cdn11.bigcommerce.com/s-dpaf5pw/images/stencil/original/products/148/658/PawStencilSmallNEW__06609.1544726380.jpg?c=2`} alt="Cute Dog looking to be rehomed"/>
 				</div>
 				<div className="col-md-8">	
 				<CardBody style={{textAlign: "center"}}>
-					<CardTitle style={{textTransform: "uppercase", fontWeight: "bolder", textDecoration: "underline"}}>Dogs name</CardTitle>
-					<CardSubtitle>dogs.description</CardSubtitle>
-					<CardText>dogs.size</CardText>
-					<CardText>dogs.age</CardText>
-					<CardText>dogs.coat</CardText>
-					<CardText>dogs.breeds</CardText>
-					<CardText>dogs.children</CardText>
-					<CardText>dogs.dogs</CardText>
-					<CardText>dogs.cats</CardText>
+					<CardTitle style={{textTransform: "uppercase", fontWeight: "bolder", textDecoration: "underline"}}>{dog.name}</CardTitle>
+					<CardSubtitle>dog.description</CardSubtitle>
+					<CardText>{dog.size}</CardText>
+					<CardText>{dog.age}</CardText>
+					<CardText>{dog.coat}</CardText>
+					<CardText>{dog.breeds}</CardText>
+					<CardText>{dog.children}</CardText>
+					<CardText>{dog.dogs}</CardText>
+					<CardText>{dog.cats}</CardText>
 					<CardLink href='#'>users.email</CardLink>
 				</CardBody>
 				</div>
@@ -40,6 +41,5 @@ function RehomeShow(props) {
     )
 }
 
-// needs to be placed into image tag
-// dog.image ? dog.image : 
+ 
 export default RehomeShow;

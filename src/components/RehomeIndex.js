@@ -45,8 +45,9 @@ class RehomeIndex extends Component {
     	{this.state.dogs 
     		?
     		dogs = this.state.dogs.map((dog) => {
+    			console.log(dog);
 				return(
-					<CardDeck key={dog.id} className="no-gutters">
+					<CardDeck key={dog._id} className="no-gutters">
 						<Card body outline color="secondary" className="mb-4" >
 						<CardBody style={{textAlign: "justify"}}>
 						<div className="col-md-6">
@@ -54,7 +55,7 @@ class RehomeIndex extends Component {
 						</div>
 							<CardTitle style={{textTransform: "uppercase", fontWeight: "bolder", textDecoration: "underline"}}>{dog.name}</CardTitle>
 							<CardSubtitle>{dog.breed}</CardSubtitle>
-							<Button color="primary" onClick={() => this.props.history.push(`/dogs/rehome/${dog.id}`)}>Info</Button>
+							<Button color="primary" onClick={() => this.props.history.push(`/dogs/rehome/${dog._id}`, dog)}>Info</Button>
 						</CardBody>
 						</Card>
 					</CardDeck>
@@ -68,7 +69,7 @@ class RehomeIndex extends Component {
 		<h3>Rehome Dogs</h3>
 		<h6>These Dogs are currently in homes and they are looking for their forever home.</h6>
 			<br/>
-				{ dogs }
+			{ dogs }
 		</Container>
     )
    }
