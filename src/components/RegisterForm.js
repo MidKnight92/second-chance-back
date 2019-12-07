@@ -7,13 +7,12 @@ import { Col, Button, Form, FormGroup, Label, Input, Container } from 'reactstra
 class RegisterForm extends Component {
     constructor() {
         super();
-
         this.state = {
             username: '',
             password: '',
             email: '',
             zip_code: '',
-            adopting: true
+            adopting: 'on'
         }
     }
     handleChange = (e) => {
@@ -23,6 +22,7 @@ class RegisterForm extends Component {
     }
     handleSubmit = async (e) => {
         e.preventDefault();
+        console.log("we prevented Default")
         const registerResponse = await fetch(process.env.REACT_APP_API_URL + '/users/register', {
             method: 'POST',
             credentials: 'include',
@@ -31,13 +31,18 @@ class RegisterForm extends Component {
                 'Content-Type': 'application/json'
             }
         });
-
+        console.log("we got a response")
 
         const parsedResponse = await registerResponse.json();
+        console.log("we parsed the response: \n")
+        console.log(parsedResponse)
+        console.log("This is the parsedResponse status", parsedResponse.status);
+        if (parsedResponse.adopting === true) {
+            // console.log("message is 'success'")
 
-        if (parsedResponse.status.message === 'Success' && this.state.adopting === true) {
             this.props.history.push('/dogs/adopt')
         } else {
+            // console.log("message is not success OR this.state.adopting is not true")
             this.props.history.push('/dogs/new')
         }
     }
@@ -83,7 +88,7 @@ class RegisterForm extends Component {
                 <FormGroup tag="fieldset" row check>
                 <Col sm={10}>
                     <Label check>
-                        <Input type="radio" name="adopting" value="off"/>{' '}
+                        <Input type="radio" name="adopting" value="off" onChange={this.handleChange}/>{' '}
                         Looking to rehome a dog? 
                     </Label>
                 </Col>  

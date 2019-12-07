@@ -13,7 +13,7 @@ const userController = require('./controllers/userController.js')
 const dogController = require('./controllers/dogController.js')
 
 // Use dependencies
-app.use(cors());
+app.use(cors({origin: 'http://localhost:3000', credentials: true}));
 app.use(bodyParser.json());
 
 // Middleware
@@ -28,30 +28,15 @@ app.use(session({
 	resave: false
 }))
 
-
-cloudinary.config({ 
-  cloud_name: process.env.CLOUD_NAME, 
-  api_key: process.env.ClOUDINARY_API_KEY, 
-  api_secret: process.env.ClOUDINARY_SECRET
-})
-
-// Enable Cors
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", '*');
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  res.setHeader(
-  	'Access-Control-Allow-Methods',
-  	'GET, POST, PUT, DELETE'
-  	)
-  next();
-});
+// cloudinary.config({ 
+//   cloud_name: process.env.CLOUD_NAME, 
+//   api_key: process.env.ClOUDINARY_API_KEY, 
+//   api_secret: process.env.ClOUDINARY_SECRET
+// })
 
 // Controllers
-app.use('/api/v1/users', userController)
-app.use('/api/v1/dogs', dogController)
+app.use('/users', userController)
+app.use('/dogs', dogController)
 
 //Port Connection  
 app.listen(PORT, () => {

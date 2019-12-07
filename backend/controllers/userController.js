@@ -27,6 +27,11 @@ router.get('/register', (req, res) => {
 //@access public
 router.post('/register', async (req, res, next) => {
 	const username = req.body.username
+	 if (req.body.adopting === 'on') {
+            req.body.adopting = true;
+        } else {
+            req.body.adopting = false;
+        }
 	try {
 		const user = await User.findOne({
 			username: username
@@ -51,8 +56,9 @@ router.post('/register', async (req, res, next) => {
 			req.session.userId = createdUser._id
 			req.session.username = createdUser.username
 			req.session.location = createdUser.zip_code
+			req.session.adopting = createdUser.adopting
 			// res.redirect('/')
-			res.json(createdUser)
+			res.status(201).send(createdUser)
 		}
 	}
 	catch (err) {
@@ -93,7 +99,7 @@ router.post('/login', async (req, res, next) => {
                 req.session.location = foundUsers[0].zip_code
                 req.session.message = 'Success'
                 // res.redirect('/register')
-                res.json(foundUsers[0])
+                res.json(foundUsers[0]).status(200)
             } else {
                 req.session.message = 'Invalid username or password'
                 // res.redirect('/users/login')
@@ -112,7 +118,7 @@ router.post('/login', async (req, res, next) => {
 router.get('/logout', async (req, res, next) => {
 	try {
 		await req.session.destroy()
-		res.json('Session over')
+		res.json('Session over').status(200)
 		// res.redirect('/')
 	}
 	catch (err) {
@@ -139,7 +145,7 @@ router.use(requireAuth)
 router.put('/:id', async (req, res, next) => {
 	try {
 		const user = await User.findOneAndUpdate(req.params.id, req.body, (err, updatedMoedl) => {
-			res.json('User has been updated')
+			res.json('User has been updated').status(200)
 			// res.redirect('/:id')
 		})
 	}

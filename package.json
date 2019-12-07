@@ -20,7 +20,7 @@
     "eject": "react-scripts eject",
     "client": "npm start",
     "server": "cd backend && nodemon",
-    "dev": "concurrently\"npm run server\" \"npm run start\""
+    "dev": "concurrently \"npm run server\" \"npm run start\""
   },
   "eslintConfig": {
     "extends": "react-app"

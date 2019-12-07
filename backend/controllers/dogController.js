@@ -58,7 +58,7 @@ let token = async (req, res, next) => {
     })
     const json = await response.json();
     tk.push(json['access_token'])
-    console.log(json['access_token']);
+    // console.log(json['access_token']);
     return json['access_token'];
 }
 

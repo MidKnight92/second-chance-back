@@ -22,7 +22,7 @@ const App = () => {
           <NavBar />
           <main>
             <Switch>
-            <Route path='/home' component={ Carousel } />
+            <Route path='/' exact component={ Carousel } />
             <Route path='/dogs/rehome/:id' component={ RehomeShow } />
             <Route path='/dogs/rehome' component={ RehomeIndex } />
             <Route path='/users/register' component={ RegisterForm } />
