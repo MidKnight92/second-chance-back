@@ -315,11 +315,17 @@ function RehomeForm(props) {
           			</Input>
         			</Col>
 				</FormGroup>
+				<FormGroup row>
+					<Label type="textarea" name="description">Description:</Label>
+					<Col sm={10}>
+						<Input type="textarea" name="description" />
+					</Col>
+				</FormGroup>
 				<FormGroup>
-			        <Label for="exampleFile">Upload an image of your dog.</Label>
+			        <Label for="file">Upload an image of your dog.</Label>
 			        <Col sm={10}>
-			        <Input type="file" encType="multipart/form-data" name="image" />
-			        <FormText color="muted">
+			        	<Input type="file" encType="multipart/form-data" name="image" />
+			        	<FormText color="muted">
 			          Input file (jpg, jpeg, png, or gif)
 			        </FormText>
 			        </Col>
