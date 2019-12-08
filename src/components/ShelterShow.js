@@ -14,7 +14,7 @@ import {
 
 
 function ShelterShow(props) {
-	console.log('This is props in Shelter show\n', props.location.state);
+	console.log('This is props in Shelter show\n');
 	const dog = props.location.state
     return (
         <Container >
@@ -39,7 +39,7 @@ function ShelterShow(props) {
 					<CardText>{dog.contact.address.state}</CardText>
 					<CardText>{dog.contact.address.postcode}</CardText>
 					<CardText>{dog.contact.phone}</CardText>
-					<CardLink href={dog.contact.email}>{dog.contact.email}</CardLink>
+					<CardText>{dog.contact.email}</CardText>
 				</CardBody>
 				</div>
 				</Row>

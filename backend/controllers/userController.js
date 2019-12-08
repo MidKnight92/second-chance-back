@@ -57,6 +57,7 @@ router.post('/register', async (req, res, next) => {
 			req.session.username = createdUser.username
 			req.session.location = createdUser.zip_code
 			req.session.adopting = createdUser.adopting
+			req.session.email = createdUser.email
 			// res.redirect('/')
 			res.status(201).send(createdUser)
 		}

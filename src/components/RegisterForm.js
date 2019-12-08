@@ -40,10 +40,10 @@ class RegisterForm extends Component {
         if (parsedResponse.adopting === true) {
             // console.log("message is 'success'")
 
-            this.props.history.push('/dogs/adopt')
+            this.props.history.push('/dogs/adopt', parsedResponse)
         } else {
             // console.log("message is not success OR this.state.adopting is not true")
-            this.props.history.push('/dogs/new')
+            this.props.history.push('/dogs/new', parsedResponse)
         }
     }
     render() {

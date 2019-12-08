@@ -4,10 +4,49 @@ import { Col, Button, Form, FormGroup, Label, Input, Container } from 'reactstra
 // Component Description (Private):
 // This is a Form Page that shows only if the users results return true for adopting. After clicking submit on this form they should be sent to their user matches page (UserMatches.js - /dogs/:id) to see how their profile looks.
 
-function AdoptForm(props) {
-	console.log(props);
-    return (
-        <Form>
+class AdoptForm extends Component {
+	constructor(props){
+		super(props);
+		console.log('THIS IS PROPS/////In AdoptForm///////\n',props);
+		this.state = {
+			breed:'Affenpinscher',
+			size: 'small',
+			age: 'baby',
+			coat:'short',
+			good_with_children: 'off',
+			good_with_dogs: 'off',
+			good_with_cats: 'off'
+
+		}
+	}
+	handleChange = (e) => {
+		console.log(e);
+		this.setState({
+			[e.currentTarget.name]: e.currentTarget.value
+		})
+	}
+	handleSubmit = async (e) => {
+		console.log('this is preventDefault');
+		e.preventDefault();
+		const adoptResponse = await fetch(process.env.REACT_APP_API_URL + '/dogs/adopt',{
+			method: 'GET',
+			credentials: '',
+			body: JSON.stringify(this.state),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+		console.log('THIS IS THE adoptResponse');
+		const parsedResponse = await adoptResponse.json();
+		console.log(parsedResponse);
+		// if (parsedResponse.status === 200) {
+		// 	this.props.history.push('/user/:id', parsedResponse)
+		// }
+
+	}
+    render(){
+    	return (
+        <Form style={{marginBottom: '10%'}} onSubmit={this.handleSubmit}>
 			<Container>
 				<h1>Let's Find Your New Member of the Family</h1>
 				<br />
@@ -341,6 +380,7 @@ function AdoptForm(props) {
 			</Container>		
 		</Form>
     )
+    }
 }
 
 export default AdoptForm;

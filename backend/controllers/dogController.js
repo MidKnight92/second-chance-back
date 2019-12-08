@@ -77,7 +77,7 @@ interval(async () => {
 router.get('/shelter', async (req, res, next) => {
     try {
         console.log("I'm hitting the shelter route.");
-        const url = `https://api.petfinder.com/v2/animals?type=dog&location=${60611}&status=adoptable&distance=${500}`;
+        const url = `https://api.petfinder.com/v2/animals?type=dog&location=60611&status=adoptable`;
         const response = await fetch(url, {
             headers: {
                 authorization: `${process.env.TOKEN_TYPE} ${tk[tk.length-1]}`
@@ -142,7 +142,7 @@ router.get('/rehome/:id', async (req, res, next) => {
 const requireAuth = (req, res, next) => {
     if (!req.session.loggedIn) {
         req.session.message = 'You must be logged in to do that'
-        res.json('User must log in - Auth is required')
+        res.json({message:'User must log in - Auth is required', status:401})
     } else {
         next()
     }
@@ -179,11 +179,11 @@ router.post('/adopt', async (req, res, next) => {
         } else {
             req.body.good_with_cats = false;
         }
-        if (req.body.adopted === 'on') {
-            req.body.adopted = true;
-        } else {
-            req.body.adopted = false;
-        }
+        // if (req.body.adopted === 'on') {
+        //     req.body.adopted = true;
+        // } else {
+        //     req.body.adopted = false;
+        // }
         if (req.session.loggedIn === true) {
             const url = `https://api.petfinder.com/v2/animals?type=dog&breed=${req.body.breed}&size=${req.body.size}&age=${req.body.age}&coat=${req.body.coat}&good_with_children=${req.body.good_with_children}&good_with_dogs=${req.body.good_with_dogs}&good_with_cats=${req.body.good_with_cats}&location=${req.session.location}&status=adoptable&distance=${500}`;
             const response = await fetch(url, {
@@ -193,11 +193,11 @@ router.post('/adopt', async (req, res, next) => {
                 method: "GET"
             })
             const json = await response.json();
-            res.send(json)
+            res.json({dogs:json, status:200})
             // res.redirect('/dogs/:id')
         } else {
             req.session.logOutMsg = 'You need to create an account';
-            res.json('Not authorized to do that')
+            res.json({message:'Not authorized to do that', status:401})
             // res.redirect('/users/login')
         }
     } catch (err) {
@@ -237,7 +237,7 @@ router.post('/new', upload.single('image'), async (req, res, next) => {
             const dog = {
                 user: req.session.userId,
                 name: req.body.name,
-                destination: req.body.description,
+                description: req.body.description,
                 breed: req.body.breed,
                 adopted: req.body.adopted,
                 size: req.body.size,
@@ -249,15 +249,16 @@ router.post('/new', upload.single('image'), async (req, res, next) => {
                 image: req.file
             }
             const savedDog = await Dog.create(dog)
-            res.json(savedDog)
-            // res.redirect('/dogs/:id')
+            res.json({dog:savedDog, status:201})
+            // res.redirect('/users/:id')
         } else {
             req.session.logOutMsg = 'You need to create an account';
-            res.json('Not authorized to do that')
+            res.json({status: 401})
             // res.redirect('/users/login')
         }
     } catch (err) {
-        res.status(400).json('Error' + err)
+        res.json({status: 400, error: err})
+        // res.sendStatus(400).json('Error' + err)
         next(err)
     }
 })
@@ -270,7 +271,8 @@ router.get('/:id', async (req, res, next) => {
         const dogs = await Dog.find({ user: req.session.userId });
         res.json({
             dog: dogs,
-            userId: req.session.userId
+            userId: req.session.userId,
+            status: 200
         })
     } catch (err) {
         res.status(400).json('Error' + err)
@@ -287,7 +289,8 @@ router.get('/:id/edit', async (req, res, next) => {
             dog: oneDog
         })
     } catch (err) {
-        res.status(400).json('Error' + err)
+        res.json({status: 400, error: err})
+        // res.status(400).json('Error' + err)
         next(err)
     }
 })
@@ -333,9 +336,9 @@ router.put('/:id', async (req, res, next) => {
         }
         const dog = await Dog.findByIdAndUpdate(req.params.id, updatedDogInfo)
         // res.redirect('/dogs/:id')
-        res.json(dog)
+        res.json({dog: dog, status:200})
     } catch (err) {
-        res.status(400).json('Error' + err)
+        res.json({status: 400, error: err})
         next(err)
     }
 })
