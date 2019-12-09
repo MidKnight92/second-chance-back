@@ -15,7 +15,7 @@ import Footer from './components/Footer.js'
 import ShelterShow from './components/ShelterShow.js'
 import ShelterIndex from './components/ShelterIndex.js'
 import DogProfile from './components/DogProfile.js'
-import UserProfile from './components/UserProfile.js'
+import UserMatches from './components/UserMatches.js'
 
 
 const NF = () => {
@@ -44,7 +44,7 @@ const App = () => {
             <Route path='/dogs/shelter/:id' component={ ShelterShow } />
             <Route path='/dogs/shelter' exact component={ ShelterIndex } />
             <Route path='/dogs/:id' render={(props) => <DogProfile {...props}/>}/> 
-            <Route path='/users/:id' render={(props) => <UserProfile {...props}/>} />
+            <Route path='/users/:id' render={(props) => <UserMatches {...props}/>} />
             <Route path='*' component ={ NF } />
             </Switch>
           </main>

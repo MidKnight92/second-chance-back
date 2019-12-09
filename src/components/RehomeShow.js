@@ -34,7 +34,7 @@ function RehomeShow(props) {
 					<CardText>{dog.good_with_children ? 'Great with Children' : 'Prefers not to be around younger children. Older children/adults are preferred'}</CardText>
 					<CardText>{dog.good_with_dogs ? 'Great with other dogs' : 'Prefers to be the only dog'}</CardText>
 					<CardText>{dog.good_with_cats ? 'Great with cats' : 'Prefers not to be around cats'}</CardText>
-					<CardLink href='#'>users.email</CardLink>
+					<CardLink href='#'>secondChance.com</CardLink>
 				</CardBody>
 				</div>
 				</Row>

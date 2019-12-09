@@ -7,8 +7,9 @@ import { Col, Button, Form, FormGroup, Label, Input, Container } from 'reactstra
 class AdoptForm extends Component {
 	constructor(props){
 		super(props);
-		console.log('THIS IS PROPS/////In AdoptForm///////\n',props.location.state.user.zip_code);
+		console.log('THIS IS PROPS/////In AdoptForm///////\n',props.location.state.user);
 		let zip = props.location.state.user.zip_code
+		let user = props.location.state.user
 		console.log(typeof zip);
 		this.state = {
 			breed:'Affenpinscher',
@@ -18,7 +19,8 @@ class AdoptForm extends Component {
 			good_with_children: 'off',
 			good_with_dogs: 'off',
 			good_with_cats: 'off',
-			zip_code: zip
+			zip_code: zip,
+			user: user
 
 		}
 	}
@@ -45,7 +47,7 @@ class AdoptForm extends Component {
 		console.log(parsedResponse);
 		if (parsedResponse.status === 200) {
 			console.log('IN');
-			this.props.history.push('/users/:id', parsedResponse)
+			this.props.history.push(`/users/${this.state.user._id}`, parsedResponse)
 		} 
 	}
     render(){
