@@ -59,7 +59,8 @@ router.post('/register', async (req, res, next) => {
 			req.session.adopting = createdUser.adopting
 			req.session.email = createdUser.email
 			// res.redirect('/')
-			res.status(201).send(createdUser)
+			res.json({status:201 , user: createdUser})
+			// res.status(201).send(createdUser)
 		}
 	}
 	catch (err) {

@@ -7,11 +7,13 @@ import { Col, Button, Form, FormGroup, FormText, Label, Input, Container } from 
 class RehomeForm extends Component{
 	constructor(props){
 		super(props);
-		console.log('THIS IS PROPS/////In rehomeForm///////\n', this.props.location.state._id);
-		let userID = this.props.location.state._id
-		console.log(typeof userID);
+		console.log('THIS IS PROPS/////In rehomeForm///////\n', this.props);
+		let userID = this.props.location.state.user._id
+		let userEmail = this.props.location.state.user.email
+		console.log(userEmail);
 		this.state = {
 			user: userID,
+			email: userEmail,
 			name: '',
 			breed:'Affenpinscher',
 			size: 'small',
@@ -46,9 +48,10 @@ class RehomeForm extends Component{
 		const parsedResponse = await rehomeResponse.json();
 		console.log('Status -->>>>>>',parsedResponse.status);
 		console.log('This is parsed Status!!!!!!!!\n',parsedResponse);
+
 		if (parsedResponse.status === 201) {
 			console.log('IN');
-			this.props.history.push(`/dogs/:${parsedResponse.dog._id}`, parsedResponse)
+			this.props.history.push(`/dogs/${parsedResponse.dog._id}`, parsedResponse)
 		}
 	}
   	render(){
@@ -330,7 +333,7 @@ class RehomeForm extends Component{
 				<FormGroup row>
 					<Label sm={2}>Size:</Label>
 					<Col sm={10}>
-          			<Input type="select" name="size" onChange={this.handleChange}>
+          			<Input type="select" name="size" value={this.state.value} onChange={this.handleChange}>
           			<option value="small">Small</option>
           			<option value="medium">Medium</option>
           			<option value="large">Large</option>

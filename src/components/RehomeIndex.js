@@ -48,7 +48,7 @@ class RehomeIndex extends Component {
     			console.log(dog);
 				return(
 					<CardDeck key={dog._id} className="no-gutters">
-						<Card body outline color="secondary" className="mb-4" >
+						<Card body outline color="secondary" className="mb-4" style={{background: 'rgb(242,243,245)'}}>
 						<CardBody style={{textAlign: "justify"}}>
 						<div className="col-md-6">
 						<CardImg top width="100%" className="rounded" src={dog.image ? dog.image : `https://cdn11.bigcommerce.com/s-dpaf5pw/images/stencil/original/products/148/658/PawStencilSmallNEW__06609.1544726380.jpg?c=2`} alt="Cute Puppy"/>

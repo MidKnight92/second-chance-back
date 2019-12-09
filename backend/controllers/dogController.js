@@ -185,7 +185,7 @@ router.post('/adopt', async (req, res, next) => {
         //     req.body.adopted = false;
         // }
         if (req.session.loggedIn === true) {
-            const url = `https://api.petfinder.com/v2/animals?type=dog&breed=${req.body.breed}&size=${req.body.size}&age=${req.body.age}&coat=${req.body.coat}&good_with_children=${req.body.good_with_children}&good_with_dogs=${req.body.good_with_dogs}&good_with_cats=${req.body.good_with_cats}&location=${req.session.location}&status=adoptable&distance=${500}`;
+            const url = `https://api.petfinder.com/v2/animals?type=dog&breed=${req.body.breed}&size=${req.body.size}&age=${req.body.age}&coat=${req.body.coat}&good_with_children=${req.body.good_with_children}&good_with_dogs=${req.body.good_with_dogs}&good_with_cats=${req.body.good_with_cats}&location=${req.body.zip_code}&status=adoptable&distance=500`;
             const response = await fetch(url, {
                 headers: {
                     authorization: `${process.env.TOKEN_TYPE} ${tk[tk.length-1]}`
@@ -236,6 +236,7 @@ router.post('/new', upload.single('image'), async (req, res, next) => {
         if (req.session.loggedIn === true) {
             const dog = {
                 user: req.session.userId,
+                email: req.session.email,
                 name: req.body.name,
                 description: req.body.description,
                 breed: req.body.breed,
@@ -272,6 +273,7 @@ router.get('/:id', async (req, res, next) => {
         res.json({
             dog: dogs,
             userId: req.session.userId,
+            email: req.session.email,
             status: 200
         })
     } catch (err) {

@@ -7,7 +7,9 @@ import { Col, Button, Form, FormGroup, Label, Input, Container } from 'reactstra
 class AdoptForm extends Component {
 	constructor(props){
 		super(props);
-		console.log('THIS IS PROPS/////In AdoptForm///////\n',props);
+		console.log('THIS IS PROPS/////In AdoptForm///////\n',props.location.state.user.zip_code);
+		let zip = props.location.state.user.zip_code
+		console.log(typeof zip);
 		this.state = {
 			breed:'Affenpinscher',
 			size: 'small',
@@ -15,7 +17,8 @@ class AdoptForm extends Component {
 			coat:'short',
 			good_with_children: 'off',
 			good_with_dogs: 'off',
-			good_with_cats: 'off'
+			good_with_cats: 'off',
+			zip_code: zip
 
 		}
 	}
@@ -24,13 +27,14 @@ class AdoptForm extends Component {
 		this.setState({
 			[e.currentTarget.name]: e.currentTarget.value
 		})
+		console.log('This is state\n',this.state)
 	}
 	handleSubmit = async (e) => {
 		console.log('this is preventDefault');
 		e.preventDefault();
 		const adoptResponse = await fetch(process.env.REACT_APP_API_URL + '/dogs/adopt',{
-			method: 'GET',
-			credentials: '',
+			method: 'POST',
+			credentials: 'include',
 			body: JSON.stringify(this.state),
 			headers: {
 				'Content-Type': 'application/json'
@@ -39,10 +43,10 @@ class AdoptForm extends Component {
 		console.log('THIS IS THE adoptResponse');
 		const parsedResponse = await adoptResponse.json();
 		console.log(parsedResponse);
-		// if (parsedResponse.status === 200) {
-		// 	this.props.history.push('/user/:id', parsedResponse)
-		// }
-
+		if (parsedResponse.status === 200) {
+			console.log('IN');
+			this.props.history.push('/users/:id', parsedResponse)
+		} 
 	}
     render(){
     	return (
@@ -53,7 +57,7 @@ class AdoptForm extends Component {
 				<FormGroup row>
 					<Label sm={2}>Breed:</Label>
 					<Col sm={10}>
-          			<Input type="select" name="breed">
+          			<Input type="select" name="breed" value={this.state.value} onChange={this.handleChange}>
           				<option value="Affenpinscher">Affenpinscher</option>
 						<option value="Afghan Hound">Afghan Hound</option>
 						<option value="Airedale Terrier">Airedale Terrier</option>
@@ -317,7 +321,7 @@ class AdoptForm extends Component {
 				<FormGroup row>
 					<Label sm={2}>Size:</Label>
 					<Col sm={10}>
-          			<Input type="select" name="size">
+          			<Input type="select" name="size" value={this.state.value} onChange={this.handleChange}>
           			<option value="small">Small</option>
           			<option value="medium">Medium</option>
           			<option value="large">Large</option>
@@ -328,7 +332,7 @@ class AdoptForm extends Component {
 				<FormGroup row>
 					<Label sm={2}>Age:</Label>
 					<Col sm={10}>
-          			<Input type="select" name="age">
+          			<Input type="select" name="age" value={this.state.value} onChange={this.handleChange}>
           			<option value="baby">Baby</option>
           			<option value="young">Young</option>
           			<option value="adult">Adult</option>
@@ -339,7 +343,7 @@ class AdoptForm extends Component {
 				<FormGroup row>
 					<Label sm={2}>Coat:</Label>
 					<Col sm={10}>
-          			<Input type="select" name="coat">
+          			<Input type="select" name="coat" value={this.state.value} onChange={this.handleChange}>
           			<option value="short">Short</option>
           			<option value="medium">Medium</option>
           			<option value="long">Long</option>
@@ -352,7 +356,7 @@ class AdoptForm extends Component {
     			<legend className="col-form-label">Does your dog need to be:</legend>
     			<Col sm={10}>
     				<Label check>
-    					<Input type="checkbox" name="good_with_children" value="on"/>{' '}
+    					<Input type="checkbox" name="good_with_children" value="on" onChange={this.handleChange}/>{' '}
     					Good with children? 
     				</Label>
     			</Col>	
@@ -360,7 +364,7 @@ class AdoptForm extends Component {
     			<FormGroup tag="fieldset" row check>
     			<Col sm={10}>
     				<Label check>
-    					{' '}<Input type="checkbox" name="good_with_dogs" value="on"/>
+    					{' '}<Input type="checkbox" name="good_with_dogs" value="on" onChange={this.handleChange}/>
     					Good with dogs? 
     				</Label>
     			</Col>	
@@ -368,7 +372,7 @@ class AdoptForm extends Component {
     			<FormGroup tag="fieldset" row check>
     			<Col sm={10}>
     				<Label check>
-    					<Input type="checkbox" name="good_with_cats" value="on"/>{' '}
+    					<Input type="checkbox" name="good_with_cats" value="on" onChange={this.handleChange}/>{' '}
     					Good with cats? 
     				</Label>
     			</Col>	

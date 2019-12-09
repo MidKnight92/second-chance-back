@@ -37,7 +37,7 @@ class RegisterForm extends Component {
         console.log("we parsed the response: \n")
         console.log(parsedResponse)
         console.log("This is the parsedResponse status", parsedResponse.status);
-        if (parsedResponse.adopting === true) {
+        if (parsedResponse.user.adopting === true) {
             // console.log("message is 'success'")
 
             this.props.history.push('/dogs/adopt', parsedResponse)

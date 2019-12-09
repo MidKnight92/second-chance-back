@@ -18,7 +18,7 @@ function ShelterShow(props) {
 	const dog = props.location.state
     return (
         <Container >
-			<Card className="mb-3"  body outline color="secondary">
+			<Card className="mb-3"  body outline color="secondary" style={{background: 'rgb(242,243,245)'}}>
 			<Row className="no-gutters">
 				<div className="col-md-4">
 					<img width="100%" src={dog.photos.length > 0 ? dog.photos[0].medium : `https://cdn11.bigcommerce.com/s-dpaf5pw/images/stencil/original/products/148/658/PawStencilSmallNEW__06609.1544726380.jpg?c=2`} alt="Dog needing to be adopted from Pet Finder API results"/>
