@@ -14,8 +14,8 @@ import {
 // THIS IS NOT THE DOG PROFILE!!!!!!!!!!!!!!!! 
 
 function RehomeShow(props) {
-	console.log('THIS IS PROPS IN RehomeShow\n', props);
-	const dog = props.location.state.user
+	const dog = props.location.state
+	console.log('THIS IS PROPS IN RehomeShow\n', props.location.state);
     return (
         <Container>
 			<Card body outline mb="3" color="secondary" style={{background: 'rgb(242,243,245)'}}>
@@ -34,7 +34,7 @@ function RehomeShow(props) {
 					<CardText>{dog.good_with_children ? 'Great with Children' : 'Prefers not to be around younger children. Older children/adults are preferred'}</CardText>
 					<CardText>{dog.good_with_dogs ? 'Great with other dogs' : 'Prefers to be the only dog'}</CardText>
 					<CardText>{dog.good_with_cats ? 'Great with cats' : 'Prefers not to be around cats'}</CardText>
-					<CardLink href='#'>secondChance.com</CardLink>
+					<CardText style={{textDecoration: 'underline', color:"blue"}}>info@secondChance.com</CardText>
 				</CardBody>
 				</div>
 				</Row>

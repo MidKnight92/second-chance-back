@@ -381,7 +381,7 @@ class AdoptForm extends Component {
     			</FormGroup>
     			<Col sm={{ size: 3 }}>
     				<br />
-                  <Button>Fetch</Button>
+                  <Button color="primary">Fetch</Button>
                 </Col>
 			</Container>		
 		</Form>

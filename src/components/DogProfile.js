@@ -11,10 +11,12 @@ import {
     Row,
     Button
 } from 'reactstrap';
+import { Link } from 'react-router-dom'
+
 
 function DogProfile(props) {
-	console.log('THIS IS PROPS IN RehomeShow\n', props);
-	const dog = props.location.state
+	console.log('THIS IS PROPS IN DogProfile\n', props);
+	const dog = props.location.state.dog
     return (
         <Container>
 			<Card body outline mb="3" color="secondary" style={{background: 'rgb(242,243,245)'}}>
@@ -34,7 +36,7 @@ function DogProfile(props) {
 					<CardText>{dog.good_with_dogs ? 'Great with other dogs' : 'Prefers to be the only dog'}</CardText>
 					<CardText>{dog.good_with_cats ? 'Great with cats' : 'Prefers not to be around cats'}</CardText>
 					<CardText>{dog.email}</CardText>
-					<Button color="primary" onClick={() => this.props.history.push(`/dogs/dogs/${dog._id}/edit`, dog)}>Edit Info</Button>
+					<Button color="primary" onClick={() => props.history.push(`/dogs/${dog._id}/edit`, dog)}>Edit Info</Button>
 				</CardBody>
 				</div>
 				</Row>
