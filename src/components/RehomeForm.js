@@ -50,7 +50,7 @@ class RehomeForm extends Component{
 		console.log('This is parsed Status!!!!!!!!\n',parsedResponse);
 
 		if (parsedResponse.status === 201) {
-			console.log('IN');
+			console.log('IN------- RehomeForm.js');
 			this.props.history.push(`/dogs/${parsedResponse.dog._id}`, parsedResponse)
 		}
 	}
@@ -405,7 +405,7 @@ class RehomeForm extends Component{
     			</Col>	
     			</FormGroup>
     			<Col sm={{ size: 3 }}>
-                  <Button style={{marginTop: "5%"}}>Submit</Button>
+                  <Button color="primary" style={{marginTop: "5%"}}>Submit</Button>
                 </Col>
 			</Container>		
 		</Form>

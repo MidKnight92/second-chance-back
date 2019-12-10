@@ -211,7 +211,8 @@ router.post('/adopt', async (req, res, next) => {
 //@description User Looking to Rehome their dog Routes - This route will show a form of dog criteria for the user to fill out in order to create a profile for their dog to be inserted into the rehoming section
 //@access restricted
 router.post('/new', upload.single('image'), async (req, res, next) => {
-    console.log(req.session);
+    console.log("req.body in dog create")
+    console.log(req.body);
     try {
         if (req.body.good_with_children === 'on') {
             req.body.good_with_children = true;
@@ -301,6 +302,10 @@ router.get('/:id/edit', async (req, res, next) => {
 //@description This route will allow Users to edit their dogs’ profile page -- require auth’d user to be that dogs owner
 //@access restricted
 router.put('/:id', async (req, res, next) => {
+    console.log("req.params in dog edit")
+    console.log(req.params)
+    console.log("req.body")
+    console.log(req.body)
     try {
         if (req.body.good_with_children === 'on') {
             req.body.good_with_children = true;
@@ -336,7 +341,9 @@ router.put('/:id', async (req, res, next) => {
             good_with_cats: req.body.good_with_cats,
             image: req.file
         }
-        const dog = await Dog.findByIdAndUpdate(req.params.id, updatedDogInfo)
+        const dog = await Dog.findByIdAndUpdate(req.params.id, updatedDogInfo, {new: true})
+        console.log("this is the updated Dog")
+        console.log(dog)
         // res.redirect('/dogs/:id')
         res.json({dog: dog, status:200})
     } catch (err) {
