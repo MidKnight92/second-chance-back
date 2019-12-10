@@ -15,7 +15,7 @@ const dogSchema = new mongoose.Schema({
 	good_with_children: Boolean,
 	good_with_dogs: Boolean,
 	good_with_cats: Boolean,
-	image: String,
+	image: Buffer,
 
 })
 

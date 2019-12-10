@@ -278,7 +278,7 @@ router.get('/:id', async (req, res, next) => {
             status: 200
         })
     } catch (err) {
-        res.status(400).json('Error' + err)
+        res.json({status: 400, error: err})
         next(err)
     }
 })
@@ -352,7 +352,21 @@ router.put('/:id', async (req, res, next) => {
     }
 })
 
-
+router.delete('/:id', async (req, res, next) => {
+    console.log('This is the delete in the dogController');
+    console.log('Here is req.params', req.params);
+    try {
+        const dog = await Dog.findByIdAndRemove(req.params.id)
+        console.log(dog);
+            if (!dog) {
+            res.json({message:'Deleted', status: 200})    
+        } 
+    }
+    catch (err) {
+        res.json({error: err})
+        next(err)
+    }
+})
 
 
 

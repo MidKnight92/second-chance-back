@@ -147,8 +147,8 @@ router.use(requireAuth)
 //@access restricted
 router.put('/:id', async (req, res, next) => {
 	try {
-		const user = await User.findOneAndUpdate(req.params.id, req.body, (err, updatedMoedl) => {
-			res.json('User has been updated').status(200)
+		const user = await User.findOneAndUpdate(req.params.id, req.body, {new: true}, (err, updatedMoedl) => {
+			res.json({user: user, status: 200})
 			// res.redirect('/:id')
 		})
 	}
