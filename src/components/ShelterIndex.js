@@ -43,39 +43,37 @@ class ShelterIndex extends Component {
         }
     }
     render() {
-    	let dogs
-    	console.log("this.state.dogs", Boolean(this.state.dogs));
-    	{this.state.dogs 
-    		?
-		    dogs = this.state.dogs.map((dog) => {
-		    	// console.log(dog.id)
-		    	return(
-						<CardDeck key={dog.id} className="no-gutters">
-							<Card body outline color="secondary" className="mb-4" style={{background: 'rgb(242,243,245)'}}>
-							<CardBody style={{textAlign: "justify"}}>
-							<div className="col-md-6">
-							<CardImg top width="100%" className="rounded" src={dog.photos.length > 0 ? dog.photos[0].medium : `https://cdn11.bigcommerce.com/s-dpaf5pw/images/stencil/original/products/148/658/PawStencilSmallNEW__06609.1544726380.jpg?c=2`} alt="Cute Puppy"/>
-							</div>
-								<CardTitle style={{textTransform: "uppercase", fontWeight: "bolder", textDecoration: "underline"}}>{dog.name}</CardTitle>
-								<CardSubtitle>{dog.breeds.primary}</CardSubtitle>
-								<CardText>{dog.description}</CardText>
-								<Button color="primary" onClick={() => this.props.history.push(`/dogs/shelter/${dog.id}`, dog)}>Info</Button>
-							</CardBody>
-							</Card>
-						</CardDeck>
-		    	)
-		    })
-		    :
-		    // console.log("this.state.dogs", Boolean(this.state.dogs));
-		    dogs = null 
-    	}
+        let dogs
+        console.log("this.state.dogs", Boolean(this.state.dogs)); {
+            this.state.dogs ?
+                dogs = this.state.dogs.map((dog) => {
+                    // console.log(dog.id)
+                    return (
+                        <CardDeck key={dog.id} className="no-gutters">
+                            <Card body outline color="secondary" className="mb-4" style={{background: 'rgb(242,243,245)'}}>
+                            <CardBody style={{textAlign: "justify"}}>
+                            <div className="col-md-6">
+                            <CardImg top width="100%" className="rounded" src={dog.photos.length > 0 ? dog.photos[0].medium : `https://cdn11.bigcommerce.com/s-dpaf5pw/images/stencil/original/products/148/658/PawStencilSmallNEW__06609.1544726380.jpg?c=2`} alt="Cute Puppy"/>
+                            </div>
+                                <CardTitle style={{textTransform: "uppercase", fontWeight: "bolder", textDecoration: "underline"}}>{dog.name}</CardTitle>
+                                <CardSubtitle>{dog.breeds.primary}</CardSubtitle>
+                                <CardText>{dog.description}</CardText>
+                                <Button color="primary" onClick={() => this.props.history.push(`/dogs/shelter/${dog.id}`, dog)}>Info</Button>
+                            </CardBody>
+                            </Card>
+                        </CardDeck>
+                    )
+                }) :
+                // console.log("this.state.dogs", Boolean(this.state.dogs));
+                dogs = null
+        }
         return (
-	        <Container>
-				<h3>Shelter Dogs</h3>
-				<h6>These Dogs are currently in shelters near you and they are looking for their forever home.</h6>
-				<br/>
-				{ dogs }
-			</Container>
+            <Container>
+                <h3>Shelter Dogs</h3>
+                <h6>These Dogs are currently in shelters near you and they are looking for their forever home.</h6>
+                <br/>
+                { dogs }
+            </Container>
         )
     }
 

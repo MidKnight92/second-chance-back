@@ -30,20 +30,21 @@ class Login extends Component {
         const parsedResponse = await loginResponse.json();
         console.log(parsedResponse);
         if (parsedResponse) {
+            // To write logic that will know which route to push the user too depending on whether they are or aren't adopting.
             console.log('It was a Success');
             this.props.history.push('/users/:id')
         } else {
             console.log('nope');
-           this.props.history.push('/users/login')
+            this.props.history.push('/users/login')
         }
     }
     render() {
         return (
             <Form onSubmit={this.handleSubmit}>
-				<Container>
-					<h1>Welcome Back</h1>
-					<img className="center" width="50%" src="https://images.unsplash.com/photo-1559096996-73fc537f9296?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"/>
-					<FormGroup row>
+                <Container>
+                    <h1>Welcome Back</h1>
+                    <img className="center" width="50%" src="https://images.unsplash.com/photo-1559096996-73fc537f9296?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"/>
+                    <FormGroup row>
                     <Label sm={2}>Username:</Label>
                     <Col sm={10}>
                     <Input type="text" name="username" placeholder="username" onChange={this.handleChange}/>
@@ -59,8 +60,8 @@ class Login extends Component {
                  <br />
                   <Button>Login</Button>
                 </Col>
-				</Container>
-			</Form>
+                </Container>
+            </Form>
         )
     }
 

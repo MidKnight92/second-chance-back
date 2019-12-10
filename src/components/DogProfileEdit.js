@@ -3,13 +3,13 @@ import { Col, Button, Form, FormGroup, FormText, Label, Input, Container } from 
 
 
 class DogProfileEdit extends Component {
-	constructor(props){
-		super(props);
-		const info = props.location.state
-		console.log(info)
-		this.state = {
-			dog: info._id,
-			user: info.user,
+    constructor(props) {
+        super(props);
+        const info = props.location.state
+        console.log(info)
+        this.state = {
+            dog: info._id,
+            user: info.user,
             name: info.name,
             breed: info.breed,
             description: info.description,
@@ -21,58 +21,85 @@ class DogProfileEdit extends Component {
             good_with_dogs: 'off',
             good_with_cats: 'off',
             image: ''
-		}
-	}
-	handleEditChange = (e) => {
-		this.setState({
-			[e.target.name]: e.target.value
-		})
-		console.log('THIS IS STATE I handleEditChange', this.state)
-	}
-	handleSubmit = async (e) => {
-		e.preventDefault()
-		try {
-			const url = process.env.REACT_APP_API_URL + `/dogs/${this.state.dog}`
+        }
+    }
+    deleteDog = async (e, id) => {
+    	console.log('this is in the deleteDog--- this.state.dog-->', this.state.dog)
+    	console.log('you hit the deleteDog!!!!')
+        console.log('THIS IS E ----->>>>', e)
+        try {
+            const deleteDogResponse = await fetch(process.env.REACT_APP_API_URL + `/dogs/${this.state.dog}`, {
+                method: 'DELETE',
+                credentials: 'include'
+            });
 
-			const updateResponse = await fetch(url, {
-				method: "PUT",
-				credentials: 'include',
-				body: JSON.stringify(this.state),
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			}) 
-			const updatedResponseParsed = await updateResponse.json()
-			console.log("THIS IS MY RESPONSE FROM THE DB after ")
-			console.log(updatedResponseParsed);
+            // This is the parsed response from dog
+            const deleteDogParsed = await deleteDogResponse.json();
+            console.log('this is the dog',deleteDogParsed)
 
-			this.setState({
-				dog: updatedResponseParsed._id,
-				user: updatedResponseParsed.user,
-	            name: updatedResponseParsed.name,
-	            breed: updatedResponseParsed.breed,
-	            description: updatedResponseParsed.description,
-	            adopted: updatedResponseParsed.adopted,
-	            size: updatedResponseParsed.size,
-	            age: updatedResponseParsed.age,
-	            coat: updatedResponseParsed.coat,
-	            good_with_children: 'off',
-	            good_with_dogs: 'off',
-	            good_with_cats: 'off',
-	            image: updatedResponseParsed.image
-			})
+            if (deleteDogParsed.status === 200) {
+                console.log('IN----- DogProfileEdit.js --------');
+                this.props.history.push('/')
+             }
+        } catch (err) {
+            console.log(err)
+        }
 
-			if (updatedResponseParsed.status === 200) {
-				console.log('IN----- DogProfileEdit.js --------');
-				this.props.history.push(`/dogs/${updatedResponseParsed.dog._id}`, updatedResponseParsed)
-			}
-		} catch (err) {
-			console.log(err)
-		}
-	}
-	render(){
-		return(
-			<Form style={{marginBottom: '10%'}} onSubmit={this.handleSubmit}>
+    }
+    handleEditChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+        console.log('THIS IS STATE I handleEditChange', this.state)
+    }
+    handleSubmit = async (e) => {
+        e.preventDefault()
+        try {
+            const url = process.env.REACT_APP_API_URL + `/dogs/${this.state.dog}`
+
+            const updateResponse = await fetch(url, {
+                method: "PUT",
+                credentials: 'include',
+                body: JSON.stringify(this.state),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            const updatedResponseParsed = await updateResponse.json()
+            console.log("THIS IS MY RESPONSE FROM THE DB after ")
+            console.log(updatedResponseParsed);
+
+            this.setState({
+                dog: updatedResponseParsed._id,
+                user: updatedResponseParsed.user,
+                name: updatedResponseParsed.name,
+                breed: updatedResponseParsed.breed,
+                description: updatedResponseParsed.description,
+                adopted: updatedResponseParsed.adopted,
+                size: updatedResponseParsed.size,
+                age: updatedResponseParsed.age,
+                coat: updatedResponseParsed.coat,
+                good_with_children: 'off',
+                good_with_dogs: 'off',
+                good_with_cats: 'off',
+                image: updatedResponseParsed.image
+            })
+
+            if (updatedResponseParsed.status === 200 && !updatedResponseParsed.adopted) {
+                console.log('IN----- DogProfileEdit.js --------');
+                this.props.history.push(`/dogs/${updatedResponseParsed.dog._id}`, updatedResponseParsed)
+             } //else if (updatedResponseParsed.status === 200 && updatedResponseParsed.adopted) {
+            //     // Delete the dog from db and forward them to the homepage.
+            //     // {this.deleteDog()};
+            //     // () => props.history.goBack('/dogs/adopt')
+            // }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+    render() {
+        return (
+            <Form style={{marginBottom: '10%'}} onSubmit={this.handleSubmit}>
 			<Container>
 				<h1>Update Your Dog's Profile</h1>
 				<FormGroup row>
@@ -421,12 +448,13 @@ class DogProfileEdit extends Component {
     			</Col>	
     			</FormGroup>
     			<Col sm={{ size: 3 }}>
-                  <Button color="primary" style={{marginTop: "5%"}}>Submit</Button>
+                  <Button color="primary" style={{marginTop: "5%", marginRight: "30%"}}>Submit</Button>
+                  <Button color="success" onClick={this.deleteDog} style={{marginTop: "5%", }}>Adopted</Button>
                 </Col>
 			</Container>		
 		</Form>
-		)
-	}
+        )
+    }
 
 }
 

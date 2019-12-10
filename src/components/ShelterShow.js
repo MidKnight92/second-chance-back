@@ -14,8 +14,8 @@ import {
 
 
 function ShelterShow(props) {
-	console.log('This is props in Shelter show\n');
-	const dog = props.location.state
+    console.log('This is props in Shelter show\n');
+    const dog = props.location.state
     return (
         <Container >
 			<Card className="mb-3"  body outline color="secondary" style={{background: 'rgb(242,243,245)'}}>

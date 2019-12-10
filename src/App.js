@@ -20,12 +20,12 @@ import UserMatches from './components/UserMatches.js'
 
 
 const NF = () => {
-  return (
-    <div style={{textAlign: 'center', fontWeight:'bolder'}}>
-     <h1> 404 - NOT FOUND </h1>
-     <h3> You Get The Cone of Shame </h3>
-     <img style={{width: '40vw'}}src='https://images.unsplash.com/photo-1523735197402-394022990845?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80'/>
-    </div>
+    return (
+      <div style={{textAlign: 'center', fontWeight:'bolder'}}>
+        <h1> 404 - NOT FOUND </h1>
+        <h3> You Get The Cone of Shame </h3>
+        <img style={{width: '40vw'}}src='https://images.unsplash.com/photo-1523735197402-394022990845?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80'/>
+      </div>
     )
 };
 

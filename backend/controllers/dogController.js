@@ -142,7 +142,7 @@ router.get('/rehome/:id', async (req, res, next) => {
 const requireAuth = (req, res, next) => {
     if (!req.session.loggedIn) {
         req.session.message = 'You must be logged in to do that'
-        res.json({message:'User must log in - Auth is required', status:401})
+        res.json({ message: 'User must log in - Auth is required', status: 401 })
     } else {
         next()
     }
@@ -154,7 +154,7 @@ router.use(requireAuth)
 //@route GET /dogs/new
 //@description User Looking to Rehome their dog Routes - This route will show a form of dog criteria for the user to fill out in order to create a profile for their dog to be inserted into the rehoming section
 // router.get('/new', (req, res) => {
-// 	res.json('new')
+//  res.json('new')
 // })
 
 //@route POST /dogs
@@ -162,7 +162,7 @@ router.use(requireAuth)
 //@access restricted
 router.post('/adopt', async (req, res, next) => {
     console.log('Hitting the adopt route - this should return matches');
-    console.log(tk[tk.length-1]);
+    console.log(tk[tk.length - 1]);
     try {
         if (req.body.good_with_children === 'on') {
             req.body.good_with_children = true;
@@ -193,11 +193,11 @@ router.post('/adopt', async (req, res, next) => {
                 method: "GET"
             })
             const json = await response.json();
-            res.json({dogs:json, status:200})
+            res.json({ dogs: json, status: 200 })
             // res.redirect('/dogs/:id')
         } else {
             req.session.logOutMsg = 'You need to create an account';
-            res.json({message:'Not authorized to do that', status:401})
+            res.json({ message: 'Not authorized to do that', status: 401 })
             // res.redirect('/users/login')
         }
     } catch (err) {
@@ -251,15 +251,15 @@ router.post('/new', upload.single('image'), async (req, res, next) => {
                 image: req.file
             }
             const savedDog = await Dog.create(dog)
-            res.json({dog:savedDog, status:201})
+            res.json({ dog: savedDog, status: 201 })
             // res.redirect('/users/:id')
         } else {
             req.session.logOutMsg = 'You need to create an account';
-            res.json({status: 401})
+            res.json({ status: 401 })
             // res.redirect('/users/login')
         }
     } catch (err) {
-        res.json({status: 400, error: err})
+        res.json({ status: 400, error: err })
         // res.sendStatus(400).json('Error' + err)
         next(err)
     }
@@ -278,7 +278,7 @@ router.get('/:id', async (req, res, next) => {
             status: 200
         })
     } catch (err) {
-        res.json({status: 400, error: err})
+        res.json({ status: 400, error: err })
         next(err)
     }
 })
@@ -292,7 +292,7 @@ router.get('/:id/edit', async (req, res, next) => {
             dog: oneDog
         })
     } catch (err) {
-        res.json({status: 400, error: err})
+        res.json({ status: 400, error: err })
         // res.status(400).json('Error' + err)
         next(err)
     }
@@ -341,29 +341,31 @@ router.put('/:id', async (req, res, next) => {
             good_with_cats: req.body.good_with_cats,
             image: req.file
         }
-        const dog = await Dog.findByIdAndUpdate(req.params.id, updatedDogInfo, {new: true})
+        const dog = await Dog.findByIdAndUpdate(req.params.id, updatedDogInfo, { new: true })
         console.log("this is the updated Dog")
         console.log(dog)
         // res.redirect('/dogs/:id')
-        res.json({dog: dog, status:200})
+        res.json({ dog: dog, status: 200 })
     } catch (err) {
-        res.json({status: 400, error: err})
+        res.json({ status: 400, error: err })
         next(err)
     }
 })
 
 router.delete('/:id', async (req, res, next) => {
     console.log('This is the delete in the dogController');
-    console.log('Here is req.params', req.params);
+    console.log('Here is req.params from dogController---->>', req.params);
     try {
+        console.log('You above the findByIdAndRemove!');
         const dog = await Dog.findByIdAndRemove(req.params.id)
-        console.log(dog);
-            if (!dog) {
-            res.json({message:'Deleted', status: 200})    
-        } 
-    }
-    catch (err) {
-        res.json({error: err})
+        console.log('This is from dogController under the await ========= ', dog);
+        if (dog) {
+            console.log('YOU ARE HERE IN THE IF!!!', dog)
+            res.json({ message: 'Deleted', status: 200 })
+        }
+    } catch (err) {
+        console.log('you got an error');
+        res.json({ error: err })
         next(err)
     }
 })

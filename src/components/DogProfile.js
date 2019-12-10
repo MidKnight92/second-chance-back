@@ -7,7 +7,7 @@ import {
     CardLink,
     CardTitle,
     CardSubtitle,
-    Container, 
+    Container,
     Row,
     Button
 } from 'reactstrap';
@@ -15,8 +15,8 @@ import { Link } from 'react-router-dom'
 
 
 function DogProfile(props) {
-	console.log('THIS IS PROPS IN DogProfile\n', props);
-	const dog = props.location.state.dog
+    console.log('THIS IS PROPS IN DogProfile\n', props);
+    const dog = props.location.state.dog
     return (
         <Container>
 			<Card body outline mb="3" color="secondary" style={{background: 'rgb(242,243,245)'}}>
@@ -45,5 +45,5 @@ function DogProfile(props) {
     )
 }
 // dog.image ? dog.image :
- 
+
 export default DogProfile;

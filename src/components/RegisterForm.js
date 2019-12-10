@@ -95,7 +95,7 @@ class RegisterForm extends Component {
                 </FormGroup>
                  <Col sm={{ size: 3 }}>
                  <br />
-                  <Button>Sign Up</Button>
+                  <Button color="primary">Sign Up</Button>
                 </Col>
                 </Container>
     		</Form>

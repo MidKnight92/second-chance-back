@@ -4,59 +4,59 @@ import { Col, Button, Form, FormGroup, FormText, Label, Input, Container } from 
 // Component Description (Private):
 // This is a Form Page that shows only if the users results return false for adopting - therefore they are looking to rehome their dog. After clicking submit on this form they should be sent to their dogs show page (Dog.js - /dogs/:id) to see how their profile looks.
 
-class RehomeForm extends Component{
-	constructor(props){
-		super(props);
-		console.log('THIS IS PROPS/////In rehomeForm///////\n', this.props);
-		let userID = this.props.location.state.user._id
-		let userEmail = this.props.location.state.user.email
-		console.log(userEmail);
-		this.state = {
-			user: userID,
-			email: userEmail,
-			name: '',
-			breed:'Affenpinscher',
-			size: 'small',
-			age: 'baby',
-			coat:'short',
-			description:'',
-			image: '',
-			good_with_children: 'off',
-			good_with_dogs: 'off',
-			good_with_cats: 'off'
+class RehomeForm extends Component {
+    constructor(props) {
+        super(props);
+        console.log('THIS IS PROPS/////In rehomeForm///////\n', this.props);
+        let userID = this.props.location.state.user._id
+        let userEmail = this.props.location.state.user.email
+        console.log(userEmail);
+        this.state = {
+            user: userID,
+            email: userEmail,
+            name: '',
+            breed: 'Affenpinscher',
+            size: 'small',
+            age: 'baby',
+            coat: 'short',
+            description: '',
+            image: '',
+            good_with_children: 'off',
+            good_with_dogs: 'off',
+            good_with_cats: 'off'
 
-		}
-	}
-	handleChange = (e) => {
-		this.setState({
-			[e.currentTarget.name]: e.currentTarget.value,
-		})
-		console.log('This is state\n',this.state);
-		console.log('This is props\n', this.props);
+        }
+    }
+    handleChange = (e) => {
+        this.setState({
+            [e.currentTarget.name]: e.currentTarget.value,
+        })
+        console.log('This is state\n', this.state);
+        console.log('This is props\n', this.props);
 
-	}
-	handleSubmit = async (e) => {
-		e.preventDefault();
-		const rehomeResponse = await fetch(process.env.REACT_APP_API_URL + '/dogs/new', {
-			method: 'POST',
-			credentials: 'include',
-			body: JSON.stringify(this.state),
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		});
-		const parsedResponse = await rehomeResponse.json();
-		console.log('Status -->>>>>>',parsedResponse.status);
-		console.log('This is parsed Status!!!!!!!!\n',parsedResponse);
+    }
+    handleSubmit = async (e) => {
+        e.preventDefault();
+        const rehomeResponse = await fetch(process.env.REACT_APP_API_URL + '/dogs/new', {
+            method: 'POST',
+            credentials: 'include',
+            body: JSON.stringify(this.state),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        const parsedResponse = await rehomeResponse.json();
+        console.log('Status -->>>>>>', parsedResponse.status);
+        console.log('This is parsed Status!!!!!!!!\n', parsedResponse);
 
-		if (parsedResponse.status === 201) {
-			console.log('IN------- RehomeForm.js');
-			this.props.history.push(`/dogs/${parsedResponse.dog._id}`, parsedResponse)
-		}
-	}
-  	render(){
-  	  return (
-        <Form style={{marginBottom: '10%'}} onSubmit={this.handleSubmit}>
+        if (parsedResponse.status === 201) {
+            console.log('IN------- RehomeForm.js');
+            this.props.history.push(`/dogs/${parsedResponse.dog._id}`, parsedResponse)
+        }
+    }
+    render() {
+        return (
+            <Form style={{marginBottom: '10%'}} onSubmit={this.handleSubmit}>
 			<Container>
 				<h1>Find Your Dog a Forever Home</h1>
 				<FormGroup row>
@@ -409,8 +409,8 @@ class RehomeForm extends Component{
                 </Col>
 			</Container>		
 		</Form>
-    )
-  }
+        )
+    }
 }
 
 export default RehomeForm;
