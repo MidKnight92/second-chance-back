@@ -43,7 +43,7 @@ const App = () => {
             <Route path='/dogs/adopt' exact render={(props)=> <AdoptForm {...props}/>} />
             <Route path='/dogs/new'exact render={(props) => <RehomeForm {...props}/>} />
             <Route path='/users/login' exact component={ Login } />
-            <Route path='/users/profile/:id' exact render={(props) => <UserProfile {...props}/>} />
+            <Route path='/users/profile/:id' component={ UserProfile } />
             <Route path='/dogs/shelter/:id' component={ ShelterShow } />
             <Route path='/dogs/shelter' exact component={ ShelterIndex } />
             <Route path='/dogs/:id/edit' render={(props) => <DogProfileEdit {...props}/>}/> 

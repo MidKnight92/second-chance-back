@@ -12,29 +12,17 @@ import React, { Component } from 'react';
 class UserProfile extends Component {
 	constructor(props){
 		super(props);
-		console.log('THIS IS MY PROPS FOR UserProfile--->>', props);
+		// console.log('THIS IS MY PROPS FOR UserProfile--->>', props);
         let userID = props.location.state.user._id
-        console.log(userID);
+        // console.log(userID);
         // let userEmail = this.props.location.state.user.email
 		this.state = {
-			user: userID,
-			email: '',
-            name: '',
-            breed: 'Affenpinscher',
-            size: 'small',
-            age: 'baby',
-            coat: 'short',
-            description: '',
-            image: '',
-            good_with_children: 'off',
-            good_with_dogs: 'off',
-            good_with_cats: 'off'
+			user: userID
 
 		}
 	}
 	componentDidMount(){
 		this.getUser();
-		// this.getDogs();
 	}
 	getUser = async (req, res, next) => {
 		console.log(this.state.user);
@@ -43,8 +31,13 @@ class UserProfile extends Component {
                 credentials: 'include',
                 method: "GET"
             });
-        const parsedResponseUser = await users.json();    
-		console.log('THIS IS DOGS!!!!!!! RESPONSE', parsedResponseUser);
+	        const parsedResponseUserInfo = await users.json();    
+			// console.log('THIS IS DOGS!!!!!!! In the UserProfile RESPONSE\n', parsedResponseUserInfo.dogs[0]);
+			if (parsedResponseUserInfo) {
+
+			console.log('THIS IS DOGS!!!!!!! In the UserProfile RESPONSE\n', parsedResponseUserInfo.dogs);
+				this.props.history.push(`/dogs/${parsedResponseUserInfo.dogs[0]._id}`, parsedResponseUserInfo.dogs[0])
+			}
 		}
 		catch (err) {
 			console.log(err)
@@ -52,7 +45,7 @@ class UserProfile extends Component {
 	}
 	render(){
 		return(
-			<h1>UserProfile</h1>
+			<h1>Loading your dog up</h1>
 		)
 	}
 }

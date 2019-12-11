@@ -40,8 +40,8 @@ class Login extends Component {
             this.props.history.push(`/users/${parsedResponse.user._id}`, parsedResponse)
         } else {
             console.log('nope');
+            // '/dogs/:id'
             this.props.history.push(`/users/profile/${parsedResponse.user._id}`, parsedResponse)
-
         }
     }
     render() {

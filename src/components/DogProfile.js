@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom'
 
 function DogProfile(props) {
     console.log('THIS IS PROPS IN DogProfile\n', props);
-    const dog = props.location.state.dog
+    const dog = props.location.state
     return (
         <Container>
 			<Card body outline mb="3" color="secondary" style={{background: 'rgb(242,243,245)'}}>

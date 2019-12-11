@@ -87,7 +87,7 @@ class DogProfileEdit extends Component {
 
             if (updatedResponseParsed.status === 200 && !updatedResponseParsed.adopted) {
                 console.log('IN----- DogProfileEdit.js --------');
-                this.props.history.push(`/dogs/${updatedResponseParsed.dog._id}`, updatedResponseParsed)
+                this.props.history.push(`/dogs/${updatedResponseParsed.dog._id}`, updatedResponseParsed.dog)
              } //else if (updatedResponseParsed.status === 200 && updatedResponseParsed.adopted) {
             //     // Delete the dog from db and forward them to the homepage.
             //     // {this.deleteDog()};

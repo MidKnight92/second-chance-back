@@ -7,10 +7,10 @@ import { Col, Button, Form, FormGroup, FormText, Label, Input, Container } from 
 class RehomeForm extends Component {
     constructor(props) {
         super(props);
-        console.log('THIS IS PROPS/////In rehomeForm///////\n', this.props);
+        // console.log('THIS IS PROPS/////In rehomeForm///////\n', this.props);
         let userID = this.props.location.state.user._id
         let userEmail = this.props.location.state.user.email
-        console.log(userEmail);
+        // console.log(userEmail);
         this.state = {
             user: userID,
             email: userEmail,
@@ -31,8 +31,8 @@ class RehomeForm extends Component {
         this.setState({
             [e.currentTarget.name]: e.currentTarget.value,
         })
-        console.log('This is state\n', this.state);
-        console.log('This is props\n', this.props);
+        // console.log('This is state\n', this.state);
+        // console.log('This is props\n', this.props);
 
     }
     handleSubmit = async (e) => {
@@ -46,12 +46,13 @@ class RehomeForm extends Component {
             }
         });
         const parsedResponse = await rehomeResponse.json();
-        console.log('Status -->>>>>>', parsedResponse.status);
-        console.log('This is parsed Status!!!!!!!!\n', parsedResponse);
+        // console.log('Status -->>>>>>', parsedResponse.status);
+        // console.log('This is parsed Status!!!!!!!!\n', parsedResponse);
 
         if (parsedResponse.status === 201) {
-            console.log('IN------- RehomeForm.js');
-            this.props.history.push(`/dogs/${parsedResponse.dog._id}`, parsedResponse)
+            console.log('IN------- RehomeForm.js', parsedResponse);
+            // this.props.history.push(`/dogs/${parsedResponse.dog._id}`, parsedResponse)
+            this.props.history.push('/dogs/rehome')
         }
     }
     render() {
