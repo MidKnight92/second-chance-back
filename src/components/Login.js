@@ -37,7 +37,7 @@ class Login extends Component {
             console.log('this is the parsedResponse.user._id====', parsedResponse.user._id)
             console.log('THIS IS parsedResponse!!!!')
             console.log(parsedResponse)
-            this.props.history.push(`/users/profile/${parsedResponse.user._id}`, parsedResponse)
+            this.props.history.push(`/users/${parsedResponse.user._id}`, parsedResponse)
         } else {
             console.log('nope');
             // this.props.history.push('/users/login')
