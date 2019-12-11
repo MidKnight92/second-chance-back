@@ -29,10 +29,10 @@ class AdoptForm extends Component {
 		this.setState({
 			[e.currentTarget.name]: e.currentTarget.value
 		})
-		console.log('This is state\n',this.state)
+		// console.log('This is state\n',this.state)
 	}
 	handleSubmit = async (e) => {
-		console.log('this is preventDefault');
+		// console.log('this is preventDefault');
 		e.preventDefault();
 		const adoptResponse = await fetch(process.env.REACT_APP_API_URL + '/dogs/adopt',{
 			method: 'POST',

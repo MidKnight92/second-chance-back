@@ -198,9 +198,7 @@ router.post('/adopt', async (req, res, next) => {
             user.url = url
             await user.save()
 
-
             const json = await response.json();
-
 
             res.json({ dogs: json, status: 200 })
             // res.redirect('/dogs/:id')
