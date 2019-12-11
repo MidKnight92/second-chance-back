@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
 	email: {type: String, required: true},
 	zip_code: {type: String, required: true},
 	adopting: {type: Boolean, required: true},
+	url: String,
 })
 
 

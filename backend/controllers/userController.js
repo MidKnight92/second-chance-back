@@ -1,8 +1,32 @@
 const express = require('express');
 const router = express.Router()
+const fetch = require('node-fetch');
 const User = require('../models/user.js')
 const Dog = require('../models/dog.js')
 const bcrypt = require('bcryptjs')
+const interval = require('interval-promise')
+
+let token = async (req, res, next) => {
+    const url = "https://api.petfinder.com/v2/oauth2/token";
+    const response = await fetch(url, {
+        body: `grant_type=client_credentials&client_id=${process.env.API_KEY}&client_secret=${process.env.SECRET}`,
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        method: "POST"
+    })
+    const json = await response.json();
+    tk.push(json['access_token'])
+    // console.log(json['access_token']);
+    return json['access_token'];
+}
+
+let tk = []
+token();
+
+interval(async () => {
+    await token()
+}, 3600000)
 
 
 //@route GET /users/
@@ -99,8 +123,21 @@ router.post('/login', async (req, res, next) => {
                 req.session.username = foundUsers[0].username
                 req.session.location = foundUsers[0].zip_code
                 req.session.message = 'Success'
-                // res.redirect('/register')
-                res.status(200).json(foundUsers[0])
+                req.session.url = foundUsers[0].url
+
+                console.log("here's the url we used");
+                console.log(foundUsers[0].url);
+                // calling url
+                const response = await fetch(foundUsers[0].url, {
+                    headers: {
+                        authorization:`${process.env.TOKEN_TYPE} ${tk[tk.length-1]}`
+                    },
+                    method: "GET"
+                })
+                console.log("\nresponse");
+                console.log(response);
+                const json = await response.json();
+                res.json({status: 200, user: foundUsers[0], dogs: json})
                 // res.json(foundUsers[0])
             } else {
                 req.session.message = 'Invalid username or password'
@@ -187,6 +224,7 @@ router.get('/:id/edit', async (req, res, next) => {
 //@description Users Show Page: This route shows users dog matches require Auth
 //@access restricted
 router.get('/:id', async (req, res, next) => {
+    console.log('users/:id');
     try {
         const dogs = await Dog.find({ user: req.session.userId });
         res.json({
@@ -194,7 +232,7 @@ router.get('/:id', async (req, res, next) => {
             userId: req.session.userId
         });
     } catch (err) {
-        res.status(400).json('Error' + err)
+        res.json({status: 400, message: 'nothing here'})
         next(err)
     }
 })

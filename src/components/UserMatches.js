@@ -21,8 +21,8 @@ function UserMatches(props) {
     if (doggies.length > 0) {
         const dogs = doggies.map((dog) => {
             return (
-                <Container style={{marginBottom: "5%"}}>
-                <Card key={dog.id} body outline color="secondary" className="mb-4" style={{background: 'rgb(242,243,245)'}}>
+                <Container key={dog.id} style={{marginBottom: "5%"}}>
+                <Card body outline color="secondary" className="mb-4" style={{background: 'rgb(242,243,245)'}}>
                     <Row className="no-gutters">
                     <div className="col-md-4">
                         <CardImg top width="100%" className="rounded" src={dog.photos.length > 0 ? dog.photos[0].medium : `https://cdn11.bigcommerce.com/s-dpaf5pw/images/stencil/original/products/148/658/PawStencilSmallNEW__06609.1544726380.jpg?c=2`} alt="Cute Puppy"/>

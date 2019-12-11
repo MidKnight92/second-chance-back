@@ -17,6 +17,7 @@ import ShelterIndex from './components/ShelterIndex.js'
 import DogProfile from './components/DogProfile.js'
 import DogProfileEdit from './components/DogProfileEdit.js'
 import UserMatches from './components/UserMatches.js'
+import UserProfile from './components/UserProfile.js'
 
 
 const NF = () => {
@@ -42,6 +43,7 @@ const App = () => {
             <Route path='/dogs/adopt' exact render={(props)=> <AdoptForm {...props}/>} />
             <Route path='/dogs/new'exact render={(props) => <RehomeForm {...props}/>} />
             <Route path='/users/login' exact component={ Login } />
+            <Route path='/users/profile/:id' exact render={(props) => <UserProfile {...props}/>} />
             <Route path='/dogs/shelter/:id' component={ ShelterShow } />
             <Route path='/dogs/shelter' exact component={ ShelterIndex } />
             <Route path='/dogs/:id/edit' render={(props) => <DogProfileEdit {...props}/>}/> 

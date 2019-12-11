@@ -192,7 +192,16 @@ router.post('/adopt', async (req, res, next) => {
                 },
                 method: "GET"
             })
+
+            // save the url on user db
+            const user = await User.findById(req.session.userId)
+            user.url = url
+            await user.save()
+
+
             const json = await response.json();
+
+
             res.json({ dogs: json, status: 200 })
             // res.redirect('/dogs/:id')
         } else {

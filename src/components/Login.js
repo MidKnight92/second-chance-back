@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Col, Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 
 class Login extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             isLoggedIn: false,
             username: '',
@@ -28,14 +28,19 @@ class Login extends Component {
                 }
             });
         const parsedResponse = await loginResponse.json();
+        console.log("here is login response");
         console.log(parsedResponse);
         if (parsedResponse) {
             // To write logic that will know which route to push the user too depending on whether they are or aren't adopting.
+
             console.log('It was a Success');
-            this.props.history.push('/users/:id')
+            console.log('this is the parsedResponse.user._id====', parsedResponse.user._id)
+            console.log('THIS IS parsedResponse!!!!')
+            console.log(parsedResponse)
+            this.props.history.push(`/users/profile/${parsedResponse.user._id}`, parsedResponse)
         } else {
             console.log('nope');
-            this.props.history.push('/users/login')
+            // this.props.history.push('/users/login')
         }
     }
     render() {
