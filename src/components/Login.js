@@ -30,7 +30,7 @@ class Login extends Component {
         const parsedResponse = await loginResponse.json();
         console.log("here is login response");
         console.log(parsedResponse);
-        if (parsedResponse) {
+        if (parsedResponse.user.adopting) {
             // To write logic that will know which route to push the user too depending on whether they are or aren't adopting.
 
             console.log('It was a Success');
@@ -40,7 +40,8 @@ class Login extends Component {
             this.props.history.push(`/users/${parsedResponse.user._id}`, parsedResponse)
         } else {
             console.log('nope');
-            // this.props.history.push('/users/login')
+            this.props.history.push(`/users/profile/${parsedResponse.user._id}`, parsedResponse)
+
         }
     }
     render() {

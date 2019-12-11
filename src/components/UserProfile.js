@@ -35,7 +35,6 @@ class UserProfile extends Component {
 	componentDidMount(){
 		this.getUser();
 		// this.getDogs();
-
 	}
 	getUser = async (req, res, next) => {
 		console.log(this.state.user);
@@ -52,7 +51,6 @@ class UserProfile extends Component {
 		}
 	}
 	render(){
-		console.log(this.props.location.state.dogs.animals);
 		return(
 			<h1>UserProfile</h1>
 		)

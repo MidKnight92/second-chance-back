@@ -125,20 +125,24 @@ router.post('/login', async (req, res, next) => {
                 req.session.message = 'Success'
                 req.session.url = foundUsers[0].url
 
-                console.log("here's the url we used");
-                console.log(foundUsers[0].url);
-                // calling url
-                const response = await fetch(foundUsers[0].url, {
-                    headers: {
-                        authorization:`${process.env.TOKEN_TYPE} ${tk[tk.length-1]}`
-                    },
-                    method: "GET"
-                })
-                console.log("\nresponse");
-                console.log(response);
-                const json = await response.json();
-                res.json({status: 200, user: foundUsers[0], dogs: json})
-                // res.json(foundUsers[0])
+                console.log("here IS THE FOUND-USER");
+                console.log(foundUsers[0]);
+                
+                // This will make a fetch call for users who are looking to adopt
+                if (foundUsers[0].adopting) {
+                    const response = await fetch(foundUsers[0].url, {
+                        headers: {
+                            authorization:`${process.env.TOKEN_TYPE} ${tk[tk.length-1]}`
+                        },
+                        method: "GET"
+                    })
+                    // console.log("\nresponse");
+                    // console.log(response);
+                    const json = await response.json();
+                    res.json({status: 200, user: foundUsers[0], dogs: json})
+                }
+                // This will be the response when a user who is not adopting receives
+                 res.json({status: 200, user: foundUsers[0]})
             } else {
                 req.session.message = 'Invalid username or password'
                 // res.redirect('/users/login')
