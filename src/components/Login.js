@@ -28,18 +28,17 @@ class Login extends Component {
                 }
             });
         const parsedResponse = await loginResponse.json();
-        console.log("here is login response");
-        console.log(parsedResponse);
+        // console.log("here is login response");
+        // console.log(parsedResponse);
         if (parsedResponse.user.adopting) {
-            // To write logic that will know which route to push the user too depending on whether they are or aren't adopting.
-
-            console.log('It was a Success');
-            console.log('this is the parsedResponse.user._id====', parsedResponse.user._id)
-            console.log('THIS IS parsedResponse!!!!')
-            console.log(parsedResponse)
+           
+            // console.log('It was a Success');
+            // console.log('this is the parsedResponse.user._id====', parsedResponse.user._id)
+            // console.log('THIS IS parsedResponse!!!!')
+            // console.log(parsedResponse)
             this.props.history.push(`/users/${parsedResponse.user._id}`, parsedResponse)
         } else {
-            console.log('nope');
+            // console.log('nope');
             // '/dogs/:id'
             this.props.history.push(`/users/profile/${parsedResponse.user._id}`, parsedResponse)
         }

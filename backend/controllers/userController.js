@@ -228,7 +228,7 @@ router.get('/:id/edit', async (req, res, next) => {
 //@description Users Show Page: This route shows users dog matches require Auth
 //@access restricted
 router.get('/:id', async (req, res, next) => {
-    console.log('users/:id');
+    // console.log('users/:id');
     try {
         const dogs = await Dog.find({ user: req.session.userId });
         res.json({

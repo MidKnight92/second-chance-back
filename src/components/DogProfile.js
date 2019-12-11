@@ -15,14 +15,14 @@ import { Link } from 'react-router-dom'
 
 
 function DogProfile(props) {
-    console.log('THIS IS PROPS IN DogProfile\n', props);
+    // console.log('THIS IS PROPS IN DogProfile\n', props);
     const dog = props.location.state
     return (
         <Container>
 			<Card body outline mb="3" color="secondary" style={{background: 'rgb(242,243,245)'}}>
 			<Row className="no-gutters">
 				<div className="col-md-4">
-					<img className="center" width="100%" src={`https://cdn11.bigcommerce.com/s-dpaf5pw/images/stencil/original/products/148/658/PawStencilSmallNEW__06609.1544726380.jpg?c=2`} alt="Cute Dog looking to be rehomed"/>
+					<img className="center" width="100%" src={dog.image ? dog.image : `https://cdn11.bigcommerce.com/s-dpaf5pw/images/stencil/original/products/148/658/PawStencilSmallNEW__06609.1544726380.jpg?c=2`} alt="Cute Dog looking to be rehomed"/>
 				</div>
 				<div className="col-md-8">	
 				<CardBody style={{textAlign: "center"}}>
@@ -44,6 +44,6 @@ function DogProfile(props) {
 		</Container>
     )
 }
-// dog.image ? dog.image :
+// 
 
 export default DogProfile;

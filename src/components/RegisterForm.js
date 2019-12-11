@@ -22,7 +22,7 @@ class RegisterForm extends Component {
     }
     handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("we prevented Default")
+        // console.log("we prevented Default")
         const registerResponse = await fetch(process.env.REACT_APP_API_URL + '/users/register', {
             method: 'POST',
             credentials: 'include',
@@ -31,12 +31,12 @@ class RegisterForm extends Component {
                 'Content-Type': 'application/json'
             }
         });
-        console.log("we got a response")
+        // console.log("we got a response")
 
         const parsedResponse = await registerResponse.json();
-        console.log("we parsed the response: \n")
-        console.log(parsedResponse)
-        console.log("This is the parsedResponse status", parsedResponse.status);
+        // console.log("we parsed the response: \n")
+        // console.log(parsedResponse)
+        // console.log("This is the parsedResponse status", parsedResponse.status);
         if (parsedResponse.user.adopting === true) {
             // console.log("message is 'success'")
 

@@ -14,7 +14,7 @@ import {
 
 
 function ShelterShow(props) {
-    console.log('This is props in Shelter show\n');
+    // console.log('This is props in Shelter show\n');
     const dog = props.location.state
     return (
         <Container >

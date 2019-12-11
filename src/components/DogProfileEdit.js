@@ -6,7 +6,7 @@ class DogProfileEdit extends Component {
     constructor(props) {
         super(props);
         const info = props.location.state
-        console.log(info)
+        // console.log(info)
         this.state = {
             dog: info._id,
             user: info.user,
@@ -24,9 +24,9 @@ class DogProfileEdit extends Component {
         }
     }
     deleteDog = async (e, id) => {
-    	console.log('this is in the deleteDog--- this.state.dog-->', this.state.dog)
-    	console.log('you hit the deleteDog!!!!')
-        console.log('THIS IS E ----->>>>', e)
+    	// console.log('this is in the deleteDog--- this.state.dog-->', this.state.dog)
+    	// console.log('you hit the deleteDog!!!!')
+     //    console.log('THIS IS E ----->>>>', e)
         try {
             const deleteDogResponse = await fetch(process.env.REACT_APP_API_URL + `/dogs/${this.state.dog}`, {
                 method: 'DELETE',
@@ -35,10 +35,10 @@ class DogProfileEdit extends Component {
 
             // This is the parsed response from dog
             const deleteDogParsed = await deleteDogResponse.json();
-            console.log('this is the dog',deleteDogParsed)
+            // console.log('this is the dog',deleteDogParsed)
 
             if (deleteDogParsed.status === 200) {
-                console.log('IN----- DogProfileEdit.js --------');
+                // console.log('IN----- DogProfileEdit.js --------');
                 this.props.history.push('/')
              }
         } catch (err) {
@@ -50,7 +50,7 @@ class DogProfileEdit extends Component {
         this.setState({
             [e.target.name]: e.target.value
         })
-        console.log('THIS IS STATE I handleEditChange', this.state)
+        // console.log('THIS IS STATE I handleEditChange', this.state)
     }
     handleSubmit = async (e) => {
         e.preventDefault()
@@ -66,8 +66,8 @@ class DogProfileEdit extends Component {
                 }
             })
             const updatedResponseParsed = await updateResponse.json()
-            console.log("THIS IS MY RESPONSE FROM THE DB after ")
-            console.log(updatedResponseParsed);
+            // console.log("THIS IS MY RESPONSE FROM THE DB after ")
+            // console.log(updatedResponseParsed);
 
             this.setState({
                 dog: updatedResponseParsed._id,
@@ -86,7 +86,7 @@ class DogProfileEdit extends Component {
             })
 
             if (updatedResponseParsed.status === 200 && !updatedResponseParsed.adopted) {
-                console.log('IN----- DogProfileEdit.js --------');
+                // console.log('IN----- DogProfileEdit.js --------');
                 this.props.history.push(`/dogs/${updatedResponseParsed.dog._id}`, updatedResponseParsed.dog)
              } //else if (updatedResponseParsed.status === 200 && updatedResponseParsed.adopted) {
             //     // Delete the dog from db and forward them to the homepage.

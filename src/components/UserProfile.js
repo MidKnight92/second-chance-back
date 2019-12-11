@@ -25,7 +25,7 @@ class UserProfile extends Component {
 		this.getUser();
 	}
 	getUser = async (req, res, next) => {
-		console.log(this.state.user);
+		// console.log(this.state.user);
 		try {
 			const users = await fetch(process.env.REACT_APP_API_URL + `/users/${this.state.user}`, {
                 credentials: 'include',
@@ -35,7 +35,7 @@ class UserProfile extends Component {
 			// console.log('THIS IS DOGS!!!!!!! In the UserProfile RESPONSE\n', parsedResponseUserInfo.dogs[0]);
 			if (parsedResponseUserInfo) {
 
-			console.log('THIS IS DOGS!!!!!!! In the UserProfile RESPONSE\n', parsedResponseUserInfo.dogs);
+			// console.log('THIS IS DOGS!!!!!!! In the UserProfile RESPONSE\n', parsedResponseUserInfo.dogs);
 				this.props.history.push(`/dogs/${parsedResponseUserInfo.dogs[0]._id}`, parsedResponseUserInfo.dogs[0])
 			}
 		}

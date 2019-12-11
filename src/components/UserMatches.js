@@ -15,8 +15,8 @@ import {
 import { Link } from 'react-router-dom';
 
 function UserMatches(props) {
-    console.log(props)
-    console.log(props.location.state.dogs.animals);
+    // console.log(props)
+    // console.log(props.location.state.dogs.animals);
     const doggies = props.location.state.dogs.animals;
     if (doggies.length > 0) {
         const dogs = doggies.map((dog) => {

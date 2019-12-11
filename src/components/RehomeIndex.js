@@ -45,7 +45,7 @@ class RehomeIndex extends Component {
     	{this.state.dogs 
     		?
     		dogs = this.state.dogs.map((dog) => {
-    			console.log(dog);
+    			// console.log(dog);
 				return(
 					<CardDeck key={dog._id} className="no-gutters">
 						<Card body outline color="secondary" className="mb-4" style={{background: 'rgb(242,243,245)'}}>

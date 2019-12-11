@@ -50,7 +50,7 @@ class RehomeForm extends Component {
         // console.log('This is parsed Status!!!!!!!!\n', parsedResponse);
 
         if (parsedResponse.status === 201) {
-            console.log('IN------- RehomeForm.js', parsedResponse);
+            // console.log('IN------- RehomeForm.js', parsedResponse);
             // this.props.history.push(`/dogs/${parsedResponse.dog._id}`, parsedResponse)
             this.props.history.push('/dogs/rehome')
         }

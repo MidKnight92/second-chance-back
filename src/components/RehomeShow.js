@@ -11,7 +11,6 @@ import {
     Row
 } from 'reactstrap';
 
-// THIS IS NOT THE DOG PROFILE!!!!!!!!!!!!!!!! 
 
 function RehomeShow(props) {
 	const dog = props.location.state

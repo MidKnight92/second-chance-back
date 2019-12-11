@@ -76,7 +76,7 @@ interval(async () => {
 //@access public
 router.get('/shelter', async (req, res, next) => {
     try {
-        console.log("I'm hitting the shelter route.");
+        // console.log("I'm hitting the shelter route.");
         const url = `https://api.petfinder.com/v2/animals?type=dog&location=60611&status=adoptable`;
         const response = await fetch(url, {
             headers: {
@@ -97,7 +97,7 @@ router.get('/shelter', async (req, res, next) => {
 // GET https://api.petfinder.com/v2/animals/{id}
 router.get('/shelter/:id', async (req, res, next) => {
     try {
-        console.log("I'm hitting the shelter id route.");
+        // console.log("I'm hitting the shelter id route.");
         const url = `https://api.petfinder.com/v2/animals/${req.params.id}`;
         const response = await fetch(url, {
             headers: {
@@ -161,8 +161,8 @@ router.use(requireAuth)
 //@description User Looking to adopt dog, the form
 //@access restricted
 router.post('/adopt', async (req, res, next) => {
-    console.log('Hitting the adopt route - this should return matches');
-    console.log(tk[tk.length - 1]);
+    // console.log('Hitting the adopt route - this should return matches');
+    // console.log(tk[tk.length - 1]);
     try {
         if (req.body.good_with_children === 'on') {
             req.body.good_with_children = true;
@@ -218,8 +218,8 @@ router.post('/adopt', async (req, res, next) => {
 //@description User Looking to Rehome their dog Routes - This route will show a form of dog criteria for the user to fill out in order to create a profile for their dog to be inserted into the rehoming section
 //@access restricted
 router.post('/new', upload.single('image'), async (req, res, next) => {
-    console.log("req.body in dog create")
-    console.log(req.body);
+    // console.log("req.body in dog create")
+    // console.log(req.body);
     try {
         if (req.body.good_with_children === 'on') {
             req.body.good_with_children = true;
@@ -309,10 +309,10 @@ router.get('/:id/edit', async (req, res, next) => {
 //@description This route will allow Users to edit their dogs’ profile page -- require auth’d user to be that dogs owner
 //@access restricted
 router.put('/:id', async (req, res, next) => {
-    console.log("req.params in dog edit")
-    console.log(req.params)
-    console.log("req.body")
-    console.log(req.body)
+    // console.log("req.params in dog edit")
+    // console.log(req.params)
+    // console.log("req.body")
+    // console.log(req.body)
     try {
         if (req.body.good_with_children === 'on') {
             req.body.good_with_children = true;
@@ -349,8 +349,8 @@ router.put('/:id', async (req, res, next) => {
             image: req.file
         }
         const dog = await Dog.findByIdAndUpdate(req.params.id, updatedDogInfo, { new: true })
-        console.log("this is the updated Dog")
-        console.log(dog)
+        // console.log("this is the updated Dog")
+        // console.log(dog)
         // res.redirect('/dogs/:id')
         res.json({ dog: dog, status: 200 })
     } catch (err) {
@@ -360,18 +360,18 @@ router.put('/:id', async (req, res, next) => {
 })
 
 router.delete('/:id', async (req, res, next) => {
-    console.log('This is the delete in the dogController');
-    console.log('Here is req.params from dogController---->>', req.params);
+    // console.log('This is the delete in the dogController');
+    // console.log('Here is req.params from dogController---->>', req.params);
     try {
-        console.log('You above the findByIdAndRemove!');
+        // console.log('You above the findByIdAndRemove!');
         const dog = await Dog.findByIdAndRemove(req.params.id)
-        console.log('This is from dogController under the await ========= ', dog);
+        // console.log('This is from dogController under the await ========= ', dog);
         if (dog) {
-            console.log('YOU ARE HERE IN THE IF!!!', dog)
+            // console.log('YOU ARE HERE IN THE IF!!!', dog)
             res.json({ message: 'Deleted', status: 200 })
         }
     } catch (err) {
-        console.log('you got an error');
+        // console.log('you got an error');
         res.json({ error: err })
         next(err)
     }

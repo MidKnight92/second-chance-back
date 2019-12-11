@@ -7,10 +7,10 @@ import { Col, Button, Form, FormGroup, Label, Input, Container } from 'reactstra
 class AdoptForm extends Component {
 	constructor(props){
 		super(props);
-		console.log('THIS IS PROPS/////In AdoptForm///////\n',props.location.state.user);
+		// console.log('THIS IS PROPS/////In AdoptForm///////\n',props.location.state.user);
 		let zip = props.location.state.user.zip_code
 		let user = props.location.state.user
-		console.log(typeof zip);
+		// console.log(typeof zip);
 		this.state = {
 			breed:'Affenpinscher',
 			size: 'small',
@@ -25,7 +25,7 @@ class AdoptForm extends Component {
 		}
 	}
 	handleChange = (e) => {
-		console.log(e);
+		// console.log(e);
 		this.setState({
 			[e.currentTarget.name]: e.currentTarget.value
 		})
@@ -42,11 +42,11 @@ class AdoptForm extends Component {
 				'Content-Type': 'application/json'
 			}
 		});
-		console.log('THIS IS THE adoptResponse');
+		// console.log('THIS IS THE adoptResponse');
 		const parsedResponse = await adoptResponse.json();
-		console.log(parsedResponse);
+		// console.log(parsedResponse);
 		if (parsedResponse.status === 200) {
-			console.log('IN');
+			// console.log('IN');
 			this.props.history.push(`/users/${this.state.user._id}`, parsedResponse)
 		} 
 	}
