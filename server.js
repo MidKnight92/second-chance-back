@@ -19,7 +19,7 @@ app.use(express.static(path.join(_dirname, 'build')));
 
 //This will allow react router to work
 app.get('/*', function (req, res) {
-   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 });
 
 

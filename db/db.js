@@ -19,5 +19,3 @@ mongoose.connection.on('error', (err) => {
 });
 
 
-// process.env.MONGODB_URI || 
-// heroku addons:create mongolab -a frozen-beyond-91162
