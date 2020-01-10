@@ -7,7 +7,7 @@ const cors = require('cors');
 const session = require('express-session')
 const methodOverride = require('method-override')
 const cloudinary = require('cloudinary')
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 const app = express();
 const path = require('path')
 const userController = require('./controllers/userController.js')
@@ -18,9 +18,9 @@ const dogController = require('./controllers/dogController.js')
 // app.use(express.static(path.join(_dirname, 'build')));
 
 //This will allow react router to work
-app.get('/*', function (req, res) {
-   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-});
+// app.get('/*', function (req, res) {
+//    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+// });
 
 
 // Use dependencies
@@ -52,6 +52,6 @@ app.use('/dogs', dogController)
 
 
 //Port Connection  
-app.listen(process.env.PORT, () => {
+app.listen(PORT, () => {
 	console.log(`SERVER IS RUNNING ON PORT: ${PORT}`);
 });
