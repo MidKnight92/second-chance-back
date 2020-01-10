@@ -7,7 +7,7 @@ const cors = require('cors');
 const session = require('express-session')
 const methodOverride = require('method-override')
 const cloudinary = require('cloudinary')
-const PORT = 5000 || process.env.PORT;
+// const PORT = 5000 || process.env.PORT;
 const app = express();
 const path = require('path')
 const userController = require('./controllers/userController.js')
@@ -53,6 +53,6 @@ app.use('/dogs', dogController)
 
 
 //Port Connection  
-app.listen(PORT, () => {
+app.listen(process.env.PORT || 5000, () => {
 	console.log(`SERVER IS RUNNING ON PORT: ${PORT}`);
 });

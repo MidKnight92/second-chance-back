@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-// const connectionString = process.env.MONGODB_URI
-const connectionString = 'mongodb://localhost/secondchance';
+
+const connectionString = process.env.MONGODB_URI || 'mongodb://localhost/secondchance';
 
 mongoose.connect(connectionString, {
     useNewUrlParser: true,
