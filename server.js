@@ -15,14 +15,13 @@ const dogController = require('./controllers/dogController.js')
 
 
 
-// app.use(express.static(path.join(_dirname, 'build')));
+app.use(express.static(path.join(_dirname, 'build')));
 
-// //This will allow react router to work
-// +app.get('/', function(req, res) {
-// 	-app.get('/*', function (req, res) {
-//        res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-//     });
-// });
+//This will allow react router to work
+app.get('/*', function (req, res) {
+   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 
 // Use dependencies
 app.use(cors({origin: 'http://localhost:3000', credentials: true}));
